@@ -1,0 +1,88 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: white;
+  // box-shadow: $shadow;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+
+  .logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: blue;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    a{
+      text-decoration: none;
+    }
+  }
+
+  .user-info {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    font-weight: 500;
+    font-size: 1rem;
+
+    .coins {
+      // background-color: $coin-color;
+      // color: $text-dark;
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .user {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      .user-avatar {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        background-color: blue;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+
+    a {
+      // color: $text-dark;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: blue;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 1rem;
+
+    .user-info {
+      gap: 1rem;
+    }
+  }
+}

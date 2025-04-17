@@ -1,0 +1,31 @@
+.rewards {
+    flex: 1;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 10px;
+    // box-shadow: $shadow;
+  
+    .reward-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+  
+    .reward-card {
+    //   background-color: $app-bg;
+      padding: 1rem;
+      border-radius: 0.75rem;
+    //   box-shadow: $shadow;
+      text-align: center;
+  
+      button {
+        margin-top: 0.5rem;
+        background-color: gold;
+        border: none;
+        padding: 0.4rem 0.8rem;
+        border-radius: 0.5rem;
+        cursor: pointer;
+      }
+    }
+  }

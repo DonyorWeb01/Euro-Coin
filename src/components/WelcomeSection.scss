@@ -1,0 +1,22 @@
+.welcome {
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    // box-shadow: $shadow;
+    margin-top: 1rem;
+  
+    h2 {
+      margin-bottom: 0.5rem;
+      color: blue;
+    }
+  
+    button {
+      margin-top: 1rem;
+      background-color: blue;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+    }
+  }

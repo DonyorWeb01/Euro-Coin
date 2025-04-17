@@ -1,0 +1,42 @@
+/* src/pages/UsersList.scss */
+.users-list {
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+  }
+  
+  .title {
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  table th, table td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd;
+  }
+  
+  table th {
+    background-color: #2d87f0;
+    color: white;
+  }
+  
+  table td button {
+    background-color: #2d87f0;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  table td button:hover {
+    background-color: #1f65c3;
+  }
+  

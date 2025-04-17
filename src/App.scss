@@ -1,0 +1,24 @@
+$app-bg: #c842c6;
+$primary: #1d4ed8;
+$coin-color: #facc15;
+$text-dark: #111827;
+$card-radius: 1rem;
+$shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+.app {
+  background-color: $app-bg;
+  color: $text-dark;
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+
+  .main {
+    padding: 1rem 2rem;
+
+    .content {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+  }
+}
