@@ -4,18 +4,45 @@ import "./LoginModal.scss";
 const LoginModal = ({ onLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("student"); // default role
+  const [role, setRole] = useState("");
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (email && password) {
-      localStorage.setItem("token", "mockToken123");
+    if (!email || !password) {
+      setError("Iltimos, barcha maydonlarni to‘ldiring");
+      return;
+    }
+
+    try {
+      const response = await fetch("https://coinsite.pythonanywhere.com/token/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          username: email,
+          password: password
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error("Login yoki parol noto‘g‘ri");
+      }
+
+      const data = await response.json();
+      console.log("Token:", data);
+
+      localStorage.setItem("token", data.access);
       localStorage.setItem("role", role);
-      localStorage.setItem("login", email)
-      onLogin();
-    } else {
-      alert("Iltimos, barcha maydonlarni to‘ldiring");
+      localStorage.setItem("login", email);
+
+      setError("");
+      onLogin(); // parent komponentga login bo‘ldi deb xabar beradi
+
+    } catch (err) {
+      setError(err.message);
     }
   };
 
@@ -40,6 +67,7 @@ const LoginModal = ({ onLogin }) => {
           <option value="teacher">O‘qituvchi</option>
           <option value="admin">Admin</option>
         </select>
+        {error && <p className="error">{error}</p>}
         <button type="submit">Kirish</button>
       </form>
     </div>

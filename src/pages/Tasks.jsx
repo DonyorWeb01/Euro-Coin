@@ -1,7 +1,10 @@
-import React from "react";
-import "./Tasks.scss"
+import React, { useState } from "react";
+import "./Tasks.scss";
+import StudentTaskModal from "./StudentTasksModal"; // modal componentni import qilamiz
 
 const Tasks = () => {
+  const [showModal, setShowModal] = useState(false);
+
   const tasks = [
     {
       id: 1,
@@ -26,6 +29,12 @@ const Tasks = () => {
     },
   ];
 
+  const handleClick = (task) => {
+    if (!task.completed) {
+      setShowModal(true);
+    }
+  };
+
   return (
     <div className="task-page">
       <h1 className="page-title">📝 Mening Topshiriqlarim</h1>
@@ -40,10 +49,14 @@ const Tasks = () => {
             </div>
             <p className="desc">{task.description}</p>
             <p className="deadline">⏰ Muddat: {task.deadline}</p>
-            <button className="btn">{task.completed ? "Ko'rib chiqish" : "Bajarishni boshlash"}</button>
+            <button className="btn" onClick={() => handleClick(task)}>
+              {task.completed ? "Ko'rib chiqish" : "Bajarishni boshlash"}
+            </button>
           </div>
         ))}
       </div>
+
+      {showModal && <StudentTaskModal onClose={() => setShowModal(false)} />}
     </div>
   );
 };
