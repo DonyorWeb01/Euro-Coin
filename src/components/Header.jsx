@@ -9,7 +9,10 @@ const Header = ({ userRole }) => {
   return (
     <header className="header">
       <div className="logo">
-        <Link to="/">EURO COIN</Link>
+        <Link to="/">
+        <img className="logoImg" src="./public/logo.png" alt="" />
+        <p className="logoName">EURO COIN</p>
+        </Link>
       </div>
       <nav className="nav-links">
         {/* Talaba uchun navigatsiya */}
@@ -17,7 +20,6 @@ const Header = ({ userRole }) => {
           <>
             <Link to="/">Bosh sahifa</Link>
             <Link to="/tasks">Topshiriqlar</Link>
-            <Link to="/rewards">Sovrinlar</Link>
             <Link to="/profile">Profil</Link>
           </>
         )}
@@ -26,8 +28,9 @@ const Header = ({ userRole }) => {
         {userRole === "teacher" && (
           <>
             <Link to="/">Bosh sahifa</Link>
-            <Link to="/tasks">Topshiriqlar</Link>
             <Link to="/students">Talabalar Ro‘yxati</Link>
+            <Link to="/createTest">Yangi test yaratish</Link>
+            <Link to="/profile">Profil</Link>
           </>
         )}
 

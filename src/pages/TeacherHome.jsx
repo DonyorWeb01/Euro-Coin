@@ -5,7 +5,6 @@ const TeacherHome = () => {
   const [teacher, setTeacher] = useState(null);
   const [error, setError] = useState(null);
 
-  const login = localStorage.getItem("login");
   const token = localStorage.getItem("token");
 
   useEffect(() => {
@@ -14,8 +13,8 @@ const TeacherHome = () => {
         const response = await fetch("https://coinsite.pythonanywhere.com/mentors/get-me/", {
           method: "GET",
           headers: {
-            "Authorization": `Bearer ${token}`
-          }
+            Authorization: `Bearer ${token}`,
+          },
         });
 
         if (!response.ok) {
@@ -36,33 +35,30 @@ const TeacherHome = () => {
 
   return (
     <div className="teacher-home">
-      <h1 className="welcome-text">
-        Assalomu alaykum, {teacher?.name}!
-      </h1>
-
       {error && <p className="error">{error}</p>}
 
-      <div className="cards">
-        <div className="card">
-          <h2>{teacher?.course}</h2>
-          <p>Bugungi darslar</p>
-        </div>
-        <div className="card">
-          <h2>{teacher?.user}</h2>
-          <p>Faol o‘quvchilar</p>
-        </div>
-        <div className="card">
-          <h2>7</h2>
-          <p>Yuborilgan topshiriqlar</p>
+      <div className="profile-card">
+        <img
+          src={teacher?.image || "/default-profile.png"}
+          alt="Profil rasmi"
+          className="profile-img"
+        />
+        <div className="profile-info">
+          <h1>{teacher?.name || "Ism topilmadi"}</h1>
+          <p>Tug‘ilgan sana: {teacher?.birth_date || "Ma'lumot mavjud emas"}</p>
         </div>
       </div>
 
-      <div className="students-section">
-        <h2>So‘nggi faol o‘quvchilar</h2>
-        <ul className="student-list">
-          <li>🔹 Abdulla Karimov</li>
-          <li>🔹 Malika Sobirova</li>
-          <li>🔹 Akbar Aliyev</li>
+      <div className="courses-section">
+        <h2>Mavjud kurslar</h2>
+        <ul className="course-list">
+          {teacher?.course_names?.length > 0 ? (
+            teacher.course_names.map((course, index) => (
+              <li key={index} className="course-item">{course}</li>
+            ))
+          ) : (
+            <p>Hech qanday kurs mavjud emas</p>
+          )}
         </ul>
       </div>
     </div>

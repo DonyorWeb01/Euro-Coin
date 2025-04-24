@@ -1,38 +1,95 @@
-// src/pages/UsersList.jsx
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./UsersList.scss";
 
 const UsersList = () => {
+  const [students, setStudents] = useState([]);
+  const [teachers, setTeachers] = useState([]);
+  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ4MDU5OTgxLCJpYXQiOjE3NDU0Njc5ODEsImp0aSI6IjQ3NGE4ZjUyM2NkZDRkYjc5ZDA3NDRlMzc5OGYzYjM5IiwidXNlcl9pZCI6Nn0.HjbOO_ixcPi88Ti5zy0ow7UPP8C6zSUfxwRbnBzbMSg"; // Token
+
+  useEffect(() => {
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", `Bearer ${token}`);
+
+    const requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+    };
+
+    // Fetching students
+    fetch("https://coinsite.pythonanywhere.com/students/", requestOptions)
+      .then((response) => response.json())
+      .then((result) => setStudents(result))
+      .catch((error) => console.error("Error fetching students:", error));
+
+    // Fetching teachers
+    fetch("https://coinsite.pythonanywhere.com/mentors/", requestOptions)
+      .then((response) => response.json())
+      .then((result) => setTeachers(result))
+      .catch((error) => console.error("Error fetching teachers:", error));
+  }, [token]);
+
   return (
     <div className="users-list">
       <h1 className="title">Foydalanuvchilar Ro‘yxati</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Ism</th>
-            <th>Email</th>
-            <th>Rol</th>
-            <th>Harakatlar</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>Donyor</td>
-            <td>donyor@example.com</td>
-            <td>Talaba</td>
-            <td><button className="btn">Tahrirlash</button></td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Kamola</td>
-            <td>kamola@example.com</td>
-            <td>O‘qituvchi</td>
-            <td><button className="btn">Tahrirlash</button></td>
-          </tr>
-        </tbody>
-      </table>
+      <div className="section">
+        <h2>Talabalar</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Ism</th>
+              <th>Tug'ilgan sana</th>
+              <th>Rasm</th>
+            </tr>
+          </thead>
+          <tbody>
+            {students.map((student, index) => (
+              <tr key={student.id}>
+                <td>{index + 1}</td>
+                <td>{student.name}</td>
+                <td>{student.birth_date}</td>
+                <td>
+                  <img
+                    src={student.image}
+                    alt={student.name}
+                    className="user-img"
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div className="section">
+        <h2>O‘qituvchilar</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Ism</th>
+              <th>Tug'ilgan sana</th>
+              <th>Rasm</th>
+            </tr>
+          </thead>
+          <tbody>
+            {teachers.map((teacher, index) => (
+              <tr key={teacher.id}>
+                <td>{index + 1}</td>
+                <td>{teacher.name}</td>
+                <td>{teacher.birthday}</td>
+                <td>
+                  <img
+                    src={teacher.image}
+                    alt={teacher.name}
+                    className="user-img"
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

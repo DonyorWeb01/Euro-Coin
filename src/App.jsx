@@ -4,14 +4,14 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Tasks from "./pages/Tasks";
-import Rewards from "./pages/Rewards";
 import Profile from "./pages/Profile";
 import LoginModal from "./components/LoginModal";
 
 // 🔹 O‘qituvchi sahifalari
 import TeacherHome from "./pages/TeacherHome";
-import TeacherTasks from "./pages/TeacherTasks";
 import StudentsList from "./pages/StudentsList";
+import TeacherCreateTest from "./pages/TeacherCreatetest";
+
 
 // 🔹 Admin sahifalari
 import AdminPanel from "./pages/AdminPanel";
@@ -48,7 +48,6 @@ const App = () => {
               <>
                 <Route path="/" element={<Home />} />
                 <Route path="/tasks" element={<Tasks />} />
-                <Route path="/rewards" element={<Rewards />} />
                 <Route path="/profile" element={<Profile />} />
               </>
             )}
@@ -57,8 +56,9 @@ const App = () => {
             {userRole === "teacher" && (
               <>
                 <Route path="/" element={<TeacherHome />} />
-                <Route path="/tasks" element={<TeacherTasks />} />
                 <Route path="/students" element={<StudentsList />} />
+                <Route path="/createTest" element={<TeacherCreateTest />} />
+                <Route path="/profile" element={<Profile />} />
               </>
             )}
 
@@ -67,6 +67,7 @@ const App = () => {
               <>
                 <Route path="/" element={<AdminPanel />} />
                 <Route path="/users" element={<UsersList />} />
+                <Route path="/profile" element={<Profile />} />
               </>
             )}
           </Routes>

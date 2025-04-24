@@ -1,7 +1,10 @@
 .footer {
-  margin-top: 3rem;
+  position: fixed;
+  bottom: 0;
+  left: 40%;  
+  margin-top: auto;
+  color: #fff;
   text-align: center;
   padding: 1rem;
   font-size: 0.9rem;
-  color: #ffffff;
 }

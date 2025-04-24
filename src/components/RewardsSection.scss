@@ -1,31 +1,79 @@
 .rewards {
-    flex: 1;
-    background-color: white;
+  padding: 2rem;
+  background: #f9fafb;
+  border-radius: 1rem;
+  max-width: 67%;
+  overflow-x: auto;
+
+  .rewards-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+
+  .loading {
+    font-size: 1.2rem;
+    color: #888;
+  }
+
+  .reward-list {
+    display: flex;
+    gap: 1rem;
+    min-width: max-content;
+  }
+
+  .reward-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 1rem;
+    width: 220px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 1rem;
-    border-radius: 10px;
-    // box-shadow: $shadow;
-  
-    .reward-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      gap: 1rem;
-      margin-top: 1rem;
+    flex-shrink: 0;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
-  
-    .reward-card {
-    //   background-color: $app-bg;
-      padding: 1rem;
-      border-radius: 0.75rem;
-    //   box-shadow: $shadow;
+
+    .reward-img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 0.5rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .reward-info {
       text-align: center;
-  
-      button {
-        margin-top: 0.5rem;
-        background-color: gold;
-        border: none;
-        padding: 0.4rem 0.8rem;
-        border-radius: 0.5rem;
-        cursor: pointer;
+
+      .reward-name {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #2d3748;
+        margin-bottom: 0.4rem;
+        max-width: 180px;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      
+      .reward-price {
+        color: #4a5568;
+        margin-bottom: 0.3rem;
+      }
+
+      .reward-amount {
+        font-size: 0.9rem;
+        color: #718096;
       }
     }
   }
+}

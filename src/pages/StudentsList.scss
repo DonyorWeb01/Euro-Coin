@@ -1,36 +1,64 @@
 .students-list {
-    padding: 2rem;
-    background-color: #fefefe;
-    border-radius: 20px;
+  padding: 40px;
+  background-color: #f8fafc;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #1f2937;
+
+  h1 {
+    font-size: 32px;
+    margin-bottom: 30px;
+    color: #111827;
+    text-align: center;
+  }
+
+  .group-section {
+    margin-bottom: 50px;
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   
-    h1 {
-      font-size: 26px;
-      margin-bottom: 1.5rem;
-      color: #333;
+    h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #3b82f6;
+      border-left: 6px solid #3b82f6;
+      padding-left: 12px;
     }
   
     table {
-      width: 100%;
+      width: 100%; // bu yerda width 100% bo‘lsa, hamma jadval teng chiqadi
+      table-layout: fixed; // ustun kengligini barqaror qiladi
       border-collapse: collapse;
-      background-color: #fff;
-      border-radius: 12px;
+      border-spacing: 0;
       overflow: hidden;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+      border-radius: 10px;
+      min-width: 600px; // bu ixtiyoriy, ammo table juda tor chiqmasin deb
   
-      th, td {
-        padding: 1rem;
+      th,
+      td {
+        padding: 14px 16px;
         text-align: left;
-        border-bottom: 1px solid #eee;
+        word-wrap: break-word;
       }
   
       th {
-        background-color: #f1f3f6;
-        color: #555;
+        background-color: #eff6ff;
+        font-weight: 600;
+        color: #1d4ed8;
+        border-bottom: 2px solid #dbeafe;
       }
   
-      tr:hover {
-        background-color: #f8fbff;
+      td {
+        background-color: #ffffff;
+        border-bottom: 1px solid #e5e7eb;
+        transition: background-color 0.3s ease;
+      }
+  
+      tr:hover td {
+        background-color: #f1f5f9;
       }
     }
   }
   
+}

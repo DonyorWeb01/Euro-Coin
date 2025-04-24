@@ -5,13 +5,40 @@ $text-dark: #111827;
 $card-radius: 1rem;
 $shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .app {
   background-color: $app-bg;
   color: $text-dark;
   font-family: 'Inter', sans-serif;
   min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150%;
+    height: 150%;
+    background-image: url("./public/logo.png"); // Rasm manzilini yoz
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    filter: blur(1px); // Xiralik darajasi
+    opacity: 0.4; // Ko‘rinish darajasi
+    z-index: 0;
+  }
 
   .main {
+    position: relative;
+    z-index: 1; // Asosiy kontent ustida turadi
     padding: 1rem 2rem;
 
     .content {

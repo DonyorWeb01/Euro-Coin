@@ -1,70 +1,72 @@
+/* TeacherHome.scss */
 .teacher-home {
+  padding: 2rem;
+  background-color: #f9fafb;
+  min-height: 100vh;
+
+  .error {
+    color: red;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .profile-card {
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
     padding: 2rem;
-    background-color: #f9f9f9;
-    min-height: 100vh;
-    border-radius: 20px;
-  
-    .welcome-text {
-      font-size: 28px;
-      font-weight: bold;
-      margin-bottom: 2rem;
-      color: #333;
+    margin-bottom: 2rem;
+    gap: 2rem;
+    flex-wrap: wrap;
+
+    .profile-img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #4f46e5;
     }
-  
-    .cards {
-      display: flex;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-  
-      .card {
-        flex: 1;
-        min-width: 200px;
-        background-color: #ffffff;
-        border-radius: 12px;
-        padding: 1.5rem;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-        text-align: center;
-        transition: transform 0.3s ease;
-  
-        &:hover {
-          transform: translateY(-5px);
-        }
-  
-        h2 {
-          font-size: 32px;
-          color: #007bff;
-          margin-bottom: 0.5rem;
-        }
-  
-        p {
-          font-size: 16px;
-          color: #666;
-        }
+
+    .profile-info {
+      h1 {
+        font-size: 1.8rem;
+        color: #111827;
+      }
+
+      p {
+        color: #6b7280;
+        margin-top: 0.5rem;
       }
     }
-  
-    .students-section {
-      margin-top: 3rem;
-  
-      h2 {
-        font-size: 22px;
-        margin-bottom: 1rem;
-        color: #444;
-      }
-  
-      .student-list {
-        list-style: none;
-        padding-left: 0;
-  
-        li {
-          font-size: 16px;
-          background-color: #e8f0fe;
-          padding: 0.8rem 1rem;
-          border-radius: 8px;
-          margin-bottom: 0.5rem;
-          color: #333;
+  }
+
+  .courses-section {
+    background: #ffffff;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #111827;
+    }
+
+    .course-list {
+      list-style: none;
+      padding: 0;
+
+      .course-item {
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid #e5e7eb;
+        color: #374151;
+
+        &:last-child {
+          border-bottom: none;
         }
       }
     }
   }
-  
+}
