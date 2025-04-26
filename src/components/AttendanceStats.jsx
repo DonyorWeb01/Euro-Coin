@@ -1,8 +1,10 @@
+
+// AttendanceStats.jsx
 import React from "react";
 import "./AttendanceStats.scss";
 
 const AttendanceStats = ({ user }) => {
-  const pointHistory = user?.point_history || [];
+  const pointHistory = (user?.point_history || []).slice().reverse();
 
   return (
     <div className="attendance">

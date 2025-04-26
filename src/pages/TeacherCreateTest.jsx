@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./TeacherCreateTest.scss";
+import { IoMdArrowRoundBack } from "react-icons/io";
+import { GrFormNextLink } from "react-icons/gr";
+import { BsFillQuestionSquareFill } from "react-icons/bs";
+import { FaQuestion, FaRegEdit } from "react-icons/fa";
 
 const TeacherCreateTest = () => {
   const [activeTab, setActiveTab] = useState("tasks");
@@ -116,7 +120,7 @@ const TeacherCreateTest = () => {
     <div className="teacher-panel">
       <div className="tabs">
         <button onClick={() => setActiveTab("tasks")} className={activeTab === "tasks" ? "active" : ""}>
-          📋 Mavjud testlar
+        <BsFillQuestionSquareFill /> Mavjud testlar
         </button>
         <button onClick={() => setActiveTab("tests")} className={activeTab === "tests" ? "active" : ""}>
           🧪 Yangi test yaratish
@@ -142,13 +146,13 @@ const TeacherCreateTest = () => {
               <input type="text" placeholder="Test nomi" value={testTitle} onChange={(e) => setTestTitle(e.target.value)} />
               <textarea placeholder="Tavsif" value={testDescription} onChange={(e) => setTestDescription(e.target.value)} />
               <input type="number" placeholder="Davomiyligi (daqiqa)" value={testDuration} onChange={(e) => setTestDuration(e.target.value)} />
-              <button onClick={handleCreateTest}>📤 Yaratish</button>
+              <button className="submit-btn" onClick={handleCreateTest}><FaRegEdit /> Yaratish</button>
             </>
           )}
 
 {step === 2 && (
   <>
-    <h3>❓ Savolni kiriting</h3>
+    <h3><FaQuestion /> Savolni kiriting</h3>
     <input
       type="text"
       placeholder="Savol matni"
@@ -156,8 +160,8 @@ const TeacherCreateTest = () => {
       onChange={(e) => setQuestionText(e.target.value)}
     />
     <div className="buttons">
-      <button onClick={() => setStep(1)}>⬅️ Ortga</button>
-      <button onClick={handleCreateQuestion}>➡️ Keyingisi</button>
+      <button onClick={() => setStep(1)}><IoMdArrowRoundBack /> Ortga</button>
+      <button onClick={handleCreateQuestion}><GrFormNextLink /> Keyingisi</button>
     </div>
   </>
 )}

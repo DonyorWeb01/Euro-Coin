@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Profile.scss";
+import { FaEdit, FaUser } from "react-icons/fa";
+import Loader from "../components/Loader"; // Loader komponentasini import qilamiz
 
 const Profile = () => {
   const role = localStorage.getItem("role");
@@ -7,9 +9,7 @@ const Profile = () => {
   const [user, setUser] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [fileInput, setFileInput] = useState(null);
-  const [refresh, setRefresh] = useState(false); // ✅ Ma’lumotni yangilash uchun trigger
-
-  console.log(user);
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     const myHeaders = new Headers();
@@ -24,7 +24,6 @@ const Profile = () => {
     let url = "";
     if (role === "student") url = "https://coinsite.pythonanywhere.com/students/get-me/";
     else if (role === "teacher") url = "https://coinsite.pythonanywhere.com/mentors/get-me/";
-    // else if (role === "admin") url = "https://coinsite.pythonanywhere.com/admins/get-me/";
 
     if (url) {
       fetch(url, requestOptions)
@@ -32,7 +31,7 @@ const Profile = () => {
         .then((data) => setUser(data))
         .catch((err) => console.error("Xatolik:", err));
     }
-  }, [role, refresh]); // ✅ refresh trigger qo‘shildi
+  }, [role, refresh]);
 
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -48,17 +47,20 @@ const Profile = () => {
 
     const formData = new FormData();
     formData.append("name", user.name);
-    formData.append("birth_date", user.birth_date);
+
+    if (role === "student") formData.append("birth_date", user.birth_date);
+    else if (role === "teacher") formData.append("birthday", user.birthday);
+
     if (fileInput && fileInput.files[0]) {
       formData.append("image", fileInput.files[0]);
     }
+
     formData.append("bio", user.bio);
     formData.append("id", user.id);
 
     let url = "";
     if (role === "student") url = `https://coinsite.pythonanywhere.com/students/${user.id}/`;
     else if (role === "teacher") url = `https://coinsite.pythonanywhere.com/mentors/${user.id}/`;
-    // else if (role === "admin") url = `https://coinsite.pythonanywhere.com/admins/update/${user.id}/`;
 
     const requestOptions = {
       method: "PUT",
@@ -69,32 +71,38 @@ const Profile = () => {
 
     fetch(url, requestOptions)
       .then((res) => res.text())
-      .then((result) => {
-        console.log(result);
+      .then(() => {
         alert("✅ Profil yangilandi!");
         setShowModal(false);
-        setRefresh(!refresh); // ✅ Ma’lumotlarni yangilash uchun triggerni almashtirish
+        setRefresh(!refresh);
       })
       .catch((err) => console.error("Xatolik:", err));
   };
 
-  if (!user) return <div className="profile-page">Yuklanmoqda...</div>;
+  if (!user) return <div className="profile-page1"><Loader /></div>; // Loader chaqiriladi
+
+  const birthDate = role === "student" ? user.birth_date : user.birthday;
 
   return (
     <div className="profile-page">
-      <h1 className="page-title">👤 Mening Profilim</h1>
+      <h1 className="page-title"><FaUser /> Mening Profilim</h1>
       <div className="profile-card">
         <img className="avatar" src={user.image || "https://i.pravatar.cc/100"} alt="User Avatar" />
         <h2 className="name">{user.name}</h2>
-        <p className="role">
-          {role === "student" && "🎓 Talaba"}
-          {role === "teacher" && "👨‍🏫 O‘qituvchi"}
-          {role === "admin" && "🛠 Admin"}
-        </p>
-        <p><strong>Tug‘ilgan sana:</strong> {user.birth_date || "Kiritilmagan"}</p>
-        <p><strong>Bio:</strong> {user.bio || "Bio mavjud emas"}</p>
 
-        <button className="edit-btn" onClick={() => setShowModal(true)}>✏️ Profilni tahrirlash</button>
+        <div className="info-box">
+          <p><strong>Rol:</strong> 
+            {role === "student" && "  Talaba"}
+            {role === "teacher" && "  O‘qituvchi"}
+            {role === "admin" && "  Admin"}
+          </p>
+          <div className="highlight-box">
+            <p><strong>Tug‘ilgan sana:</strong> {birthDate || "Kiritilmagan"}</p>
+            <p><strong>Bio:</strong> {user.bio || "Bio mavjud emas"}</p>
+          </div>
+        </div>
+
+        <button className="edit-btn" onClick={() => setShowModal(true)}><FaEdit />  Profilni tahrirlash</button>
       </div>
 
       {showModal && (
@@ -107,7 +115,12 @@ const Profile = () => {
             </label>
             <label>
               Tug‘ilgan sana:
-              <input type="date" name="birth_date" value={user.birth_date || ""} onChange={handleChange} />
+              <input
+                type="date"
+                name={role === "student" ? "birth_date" : "birthday"}
+                value={birthDate || ""}
+                onChange={handleChange}
+              />
             </label>
             <label>
               Rasm yuklash:

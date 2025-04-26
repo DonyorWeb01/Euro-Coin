@@ -1,57 +1,117 @@
-/* TeacherHome.scss */
 .teacher-home {
-  padding: 2rem;
-  background-color: #f9fafb;
-  min-height: 100vh;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 20px;
+  margin-top: 5rem;
+  margin-left: 250px;
 
   .error {
     color: red;
     text-align: center;
-    margin-bottom: 1rem;
+    margin-bottom: 15px;
   }
 
   .profile-card {
-    background: white;
-    border-radius: 1rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
     display: flex;
     align-items: center;
-    padding: 2rem;
-    margin-bottom: 2rem;
-    gap: 2rem;
-    flex-wrap: wrap;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); // Safari uchun
+    // border: 1px solid #c842c6;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
 
     .profile-img {
-      width: 120px;
-      height: 120px;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
       object-fit: cover;
-      border: 3px solid #4f46e5;
+      margin-right: 20px;
     }
 
     .profile-info {
       h1 {
-        font-size: 1.8rem;
-        color: #111827;
+        margin: 0;
+        font-size: 24px;
       }
 
       p {
-        color: #6b7280;
-        margin-top: 0.5rem;
+        margin: 4px 0 0;
+        color: #666;
+      }
+    }
+  }
+
+  .coin-give-section {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); // Safari uchun
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    // border: 1px solid #c842c6;
+    
+
+    h2 {
+      margin-bottom: 15px;
+      font-size: 20px;
+    }
+
+    .coin-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+
+      select,
+      input,
+      textarea {
+        background: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px); // Safari uchun
+        color: #1e1e1e; /* matn rangi quyuq */
+        padding: 10px;
+        border: 1px solid #c842c6;
+        // border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        outline-color: #c842c6;
+      }
+
+      button {
+        padding: 12px;
+        background-color: #b336b1;
+        color: #fff;
+        font-size: 16px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background-color: #92379b;
+        }
+      }
+
+      .success-msg {
+        color: green;
+        font-weight: 500;
       }
     }
   }
 
   .courses-section {
-    background: #ffffff;
-    border-radius: 1rem;
-    padding: 2rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-
+    background: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px); // Safari uchun
+        padding: 20px;
+    border-radius: 12px;
     h2 {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-      color: #111827;
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #1e1e1e;
     }
 
     .course-list {
@@ -59,13 +119,13 @@
       padding: 0;
 
       .course-item {
-        padding: 0.75rem 1rem;
-        border-bottom: 1px solid #e5e7eb;
-        color: #374151;
-
-        &:last-child {
-          border-bottom: none;
-        }
+        background: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px); // Safari uchun
+        border: 1px solid #c842c6;
+        margin-bottom: 8px;
+        padding: 10px 15px;
+        border-radius: 8px;
       }
     }
   }

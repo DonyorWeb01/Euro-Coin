@@ -1,52 +1,95 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import "./Header.scss";
+import { FaHome, FaPlus, FaUser, FaUsers } from "react-icons/fa";
+import { PiStudentBold } from "react-icons/pi";
+import { CiCirclePlus } from "react-icons/ci";
 
 const Header = ({ userRole }) => {
+  const [userName, setUserName] = useState("");
+  const [userCoins, setUserCoins] = useState(null);
+  const token = localStorage.getItem("token");
 
-  const login = localStorage.getItem("login")
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        let url = "";
+        if (userRole === "student") {
+          url = "https://coinsite.pythonanywhere.com/students/get-me/";
+        } else if (userRole === "teacher") {
+          url = "https://coinsite.pythonanywhere.com/mentors/get-me/";
+        } else {
+          return;
+        }
 
-  
+        const res = await fetch(url, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const data = await res.json();
+
+        if (userRole === "student") {
+          setUserName(data.name || "Ism topilmadi");
+          setUserCoins(data.points || 0);
+        } else if (userRole === "teacher") {
+          setUserName(data.name || "Ism topilmadi");
+        }
+      } catch (err) {
+        console.error("Foydalanuvchi ma'lumotlarini olishda xatolik:", err);
+      }
+    };
+
+    fetchUserData();
+  }, [userRole, token]);
+
   return (
-    <header className="header">
+    <aside className="sidebar">
+      <div className="top">
       <div className="logo">
         <Link to="/">
-        <img className="logoImg" src="./public/logo.png" alt="" />
-        <p className="logoName">EURO COIN</p>
+          <img className="logoImg" src="./public/icon.png" alt="logo" />
+          <p className="logoName">EURO COIN</p>
         </Link>
       </div>
+
       <nav className="nav-links">
-        {/* Talaba uchun navigatsiya */}
         {userRole === "student" && (
           <>
-            <Link to="/">Bosh sahifa</Link>
-            <Link to="/tasks">Topshiriqlar</Link>
-            <Link to="/profile">Profil</Link>
+            <Link to="/"><FaHome /> Bosh sahifa</Link>
+            <Link to="/tasks"><PiStudentBold /> Topshiriqlar</Link>
+            <Link to="/profile"><FaUser /> Profil</Link>
           </>
         )}
 
-        {/* O‘qituvchi uchun navigatsiya */}
         {userRole === "teacher" && (
           <>
-            <Link to="/">Bosh sahifa</Link>
-            <Link to="/students">Talabalar Ro‘yxati</Link>
-            <Link to="/createTest">Yangi test yaratish</Link>
-            <Link to="/profile">Profil</Link>
+            <Link to="/"><FaHome /> Bosh sahifa</Link>
+            <Link to="/students"><PiStudentBold /> Talabalar</Link>
+            <Link to="/createTest"><FaPlus /> Test yaratish</Link>
+            <Link to="/profile"><FaUser /> Profil</Link>
           </>
         )}
 
-        {/* Admin uchun navigatsiya */}
         {userRole === "admin" && (
           <>
-            <Link to="/">Bosh sahifa</Link>
-            <Link to="/users">Foydalanuvchilar Ro‘yxati</Link>
+            <Link to="/"><FaHome /> Bosh sahifa</Link>
+            <Link to="/users"><FaUsers /> Foydalanuvchilar</Link>
           </>
         )}
       </nav>
-      <div className="user-info">
-        <span className="coins">💰 120</span>
-        <span className="user">👤 {login}</span>
       </div>
-    </header>
+
+      <div className="user-info">
+      {(userRole === "student" || userRole === "teacher") && (
+          <span className="user"> {userName}</span>
+        )}
+        {userRole === "student" && (
+          <span className="coins"> {userCoins}🪙</span>
+        )}
+      </div>
+    </aside>
   );
 };
 

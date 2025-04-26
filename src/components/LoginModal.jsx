@@ -47,9 +47,11 @@ const LoginModal = ({ onLogin }) => {
   };
 
   return (
+    <div className="login">
+    <img className="login-img" src="./public/icon.png" alt="" />
     <div className="login-modal">
       <form onSubmit={handleSubmit}>
-        <h2>Login</h2>
+        <h2>EURO COIN</h2>
         <input
           type="text"
           placeholder="Loginni kiriting"
@@ -71,6 +73,8 @@ const LoginModal = ({ onLogin }) => {
         <button type="submit">Kirish</button>
       </form>
     </div>
+    </div>
+    
   );
 };
 

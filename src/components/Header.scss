@@ -1,93 +1,138 @@
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0rem 2rem;
-  background-color: white;
-  // box-shadow: $shadow;
-  position: sticky;
+.sidebar {
+  position: fixed;
   top: 0;
-  z-index: 100;
-  border-bottom-right-radius: 20px;
-  border-bottom-left-radius: 20px;
+  left: 0;
+  height: 100vh;
+  width: 240px;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); // Safari uchun
+  padding: 0.7rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: space-between;
+  z-index: 900;
 
-  .logo {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: blue;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    a{
-      text-decoration: none;
+  .top{
+    display: flex;
+    flex-direction: column;
+
+    .logo {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      .logoImg{
-        width: 70px;
+      margin-bottom: 2rem;
+      margin-left: 1rem;
+  
+      a {
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+  
+        .logoImg {
+          width: 100px;
+          margin-bottom: 0.5rem;
+        }
+  
+        .logoName {
+          font-size: 1.4rem;
+          font-weight: bold;
+          color: #1e1e1e;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+        }
+      }
+    }
+  
+    .nav-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-top: 1rem;
+  
+      a {
+        text-decoration: none;
+        color: #ffffff;
+        font-weight: 600;
+        font-size: 1.1rem;
+        padding: 0.8rem 1.2rem;
+        border-radius: 8px;
+        background-color: #b336b1;
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+
+        display: inline-flex;
+        align-items: center;
+        gap: 0.8rem;
+
+        &:hover {
+          background-color: #92379b;
+          color: white;
+          border-color: #932291;
+        }
+
+        &:focus {
+          outline: none;
+          box-shadow: 0 0 5px rgba(232, 26, 232, 0.5);
+        }
       }
     }
   }
 
   .user-info {
     display: flex;
+    gap: 0.5rem;
     align-items: center;
-    gap: 1.5rem;
+    justify-content: space-between;
     font-weight: 500;
     font-size: 1rem;
+    margin-bottom: 1rem;
 
     .coins {
-      // background-color: $coin-color;
-      // color: $text-dark;
-      padding: 0.5rem 1rem;
-      border-radius: 50px;
+      color: #1e1e1e;
       font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
     }
 
     .user {
       display: flex;
       align-items: center;
       gap: 0.5rem;
-
-      .user-avatar {
-        width: 35px;
-        height: 35px;
-        border-radius: 50%;
-        background-color: blue;
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-weight: bold;
-      }
-    }
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 1.5rem;
-
-    a {
-      // color: $text-dark;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 1rem;
-      transition: color 0.3s ease;
-
-      &:hover {
-        color: blue;
-      }
+      color: #1e1e1e;
+      font-weight: 600;
+      font-size: 1.1rem;
     }
   }
 }
 
 @media (max-width: 768px) {
-  .header {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
     padding: 1rem;
 
+    .logo {
+      flex-direction: row;
+      a {
+        flex-direction: row;
+        .logoImg {
+          margin-bottom: 0;
+          margin-right: 0.5rem;
+        }
+      }
+    }
+
+    .nav-links {
+      flex-direction: row;
+      gap: 1rem;
+    }
+
     .user-info {
+      flex-direction: row;
       gap: 1rem;
     }
   }

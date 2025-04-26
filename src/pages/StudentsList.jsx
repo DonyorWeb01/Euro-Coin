@@ -7,7 +7,6 @@ const StudentsList = () => {
   const [myGroupIds, setMyGroupIds] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  console.log(myGroupIds);
   
 
   const token = localStorage.getItem("token");

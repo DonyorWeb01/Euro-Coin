@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./RewardsSection.scss";
+import { FaGift } from "react-icons/fa";
 
-const RewardsSection = () => {
+const RewardsSection = ({ onLoad }) => {
   const [rewards, setRewards] = useState([]);
-  const [loading, setLoading] = useState(true);
   const token = localStorage.getItem("token");
   const scrollRef = useRef(null);
 
@@ -14,37 +14,29 @@ const RewardsSection = () => {
     fetch("https://coinsite.pythonanywhere.com/achievement/", {
       method: "GET",
       headers: myHeaders,
-      redirect: "follow"
+      redirect: "follow",
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         setRewards(data);
-        setLoading(false);
+        onLoad(); // Malumot kelganda Homega xabar beradi
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Xatolik:", error);
-        setLoading(false);
+        onLoad(); // Xato bo'lsa ham loader to'xtaydi
       });
-  }, []);
-
-  const scrollLeft = () => {
-    scrollRef.current.scrollBy({ left: -300, behavior: "smooth" });
-  };
-
-  const scrollRight = () => {
-    scrollRef.current.scrollBy({ left: 300, behavior: "smooth" });
-  };
+  }, [token, onLoad]);
 
   return (
     <div className="rewards">
-      <h3 className="rewards-title">🎁 Sovrinlar</h3>
+      <h3 className="rewards-title">
+        <FaGift /> Sovrinlar
+      </h3>
 
-      {loading ? (
-        <p className="loading">⏳ Yuklanmoqda...</p>
-      ) : (
-        <div className="scroll-wrapper">
-          <div className="reward-list" ref={scrollRef}>
-            {rewards.map((reward, index) => (
+      <div className="scroll-wrapper">
+        <div className="reward-list" ref={scrollRef}>
+          {rewards.length > 0 ? (
+            rewards.map((reward, index) => (
               <div className="reward-card" key={index}>
                 <img className="reward-img" src={reward.image} alt={reward.name} />
                 <div className="reward-info">
@@ -53,10 +45,12 @@ const RewardsSection = () => {
                   <p className="reward-amount">Qolgan: {reward.amount} ta</p>
                 </div>
               </div>
-            ))}
-          </div>
+            ))
+          ) : (
+            <p className="no-rewards">Sovrinlar mavjud emas</p>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 };

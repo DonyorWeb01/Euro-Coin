@@ -1,44 +1,99 @@
-.login-modal {
+/* LoginModal.scss */
+.login{
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  gap: 20px;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(to right, #eb74e9, #d540b2);
+  z-index: 999;
+  
+}
 
-  form {
-    background: #fff;
-    padding: 30px;
-    border-radius: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    min-width: 300px;
+.login-img{
+  width: 300px;
+}
+.login-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-    h2 {
-      margin: 0;
-    }
+.login-modal form {
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); // Safari uchun
+  padding: 3rem 2.5rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  width: 800px;
+  max-width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: fadeIn 0.5s ease-in-out;
+}
 
-    input,
-    select,
-    button {
-      padding: 10px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-    }
-
-    button {
-      background-color: #007bff;
-      color: white;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #0056b3;
-    }
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.login-modal h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+  font-family: sans-serif;
+}
+
+.login-modal input,
+.login-modal select {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.8rem;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); // Safari uchun
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.login-modal input:focus,
+.login-modal select:focus {
+  border-color: #b336b1;
+  outline: none;
+}
+
+.login-modal .error {
+  color: #ff4d4f;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.login-modal button {
+  background-color: #b336b1;
+  color: white;
+  padding: 1rem;
+  border: none;
+  border-radius: 0.8rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.login-modal button:hover {
+  background-color: #9e2b9c;
 }

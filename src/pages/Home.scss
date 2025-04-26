@@ -1,24 +1,28 @@
+
+// Home.scss
 .page-home {
-    padding: 2rem;
-  
+  padding: 2rem;
+  max-width: 1600px;
+  margin-top: 4rem;
+  margin-left: 250px;
+  height: 85vh;
+
+  .content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin: 2rem 0;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+
+  @media (max-width: 768px) {
     .content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      margin: 2rem 0;
-      border: solid 1px black;
-    }
-  
-    .section-title {
-      font-size: 1.8rem;
-      font-weight: bold;
-      margin-bottom: 1rem;
-    }
-  
-    @media (max-width: 768px) {
-      .content {
-        grid-template-columns: 1fr;
-      }
+      grid-template-columns: 1fr;
     }
   }
-  
+}

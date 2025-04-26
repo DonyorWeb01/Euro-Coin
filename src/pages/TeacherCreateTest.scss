@@ -1,10 +1,14 @@
 /* TeacherCreateTest.scss */
 
 .teacher-panel {
-  max-width: 800px;
+  max-width: 1600px;
   margin: 40px auto;
+  margin-top: 5rem;
+  margin-left: 250px;
   padding: 30px;
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px); // Safari uchun
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   font-family: "Inter", sans-serif;
@@ -20,6 +24,7 @@
       font-size: 16px;
       border: none;
       background-color: #edf2f7;
+      color: #1e1e1e;
       border-radius: 12px;
       cursor: pointer;
       transition: all 0.3s ease;
@@ -31,7 +36,7 @@
       }
 
       &:hover {
-        background-color: #e2e8f0;
+        background-color: #dde0e5;
       }
     }
   }
@@ -42,7 +47,9 @@
     gap: 20px;
 
     .task-card {
-      background: #f7fafc;
+      background: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px); // Safari uchun
       border: 1px solid #e2e8f0;
       border-radius: 12px;
       padding: 20px;
@@ -83,6 +90,9 @@
       border-radius: 10px;
       outline: none;
       transition: 0.2s ease;
+      background: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px); // Safari uchun
 
       &:focus {
         border-color: #3182ce;
@@ -97,7 +107,7 @@
 
     .submit-btn {
       padding: 12px 20px;
-      background-color: #38a169;
+      background-color: #b336b1;
       color: #fff;
       font-size: 16px;
       border: none;
@@ -106,7 +116,7 @@
       transition: background-color 0.3s ease;
 
       &:hover {
-        background-color: #2f855a;
+        background-color: #92379b;;
       }
     }
 
@@ -162,20 +172,20 @@
         border: none;
 
         &:first-child {
-          background-color: #3182ce;
+          background-color: #b33659;
           color: white;
 
           &:hover {
-            background-color: #2b6cb0;
+            background-color: #9b3746;
           }
         }
 
         &:last-child {
-          background-color: #38a169;
+          background-color: #b336b1;
           color: white;
 
           &:hover {
-            background-color: #2f855a;
+            background-color: #92379b;
           }
         }
       }

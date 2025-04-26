@@ -1,11 +1,15 @@
+
+// AttendanceStats.scss
 .attendance {
-  background: #fff;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); // Safari uchun
   padding: 1rem;
   border-radius: 10px;
   width: 30%;
   height: 400px;
-  overflow: hidden; /* Scroll container uchun radiusni saqlab qolish uchun bu qo'shiladi */
-  position: relative; /* Scrollni to'g'ri ishlashi uchun */
+  overflow: hidden;
+  position: relative;
   h3 {
     margin-bottom: 1rem;
   }
@@ -14,13 +18,16 @@
     list-style: none;
     padding: 0;
     margin: 0;
-    overflow-y: auto; /* Scrollni faollashtirish */
-    max-height: calc(100% - 40px); /* h3 uchun bo'sh joy qoldirish */
+    overflow-y: auto;
+    max-height: calc(100% - 40px);
 
     .history-item {
       display: flex;
       align-items: center;
-      background: #f7f7f7;
+      background: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px); // Safari uchun
+      margin-right: 10px;
       border-radius: 10px;
       padding: 1rem 1rem;
       margin-bottom: 0.75rem;
@@ -61,4 +68,22 @@
       }
     }
   }
+}
+
+
+/* Scrollbarning o'zi */
+.history-list::-webkit-scrollbar {
+  height: 12px;
+}
+
+/* Scrollbar fon */
+.history-list::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 1rem;
+}
+
+/* Scrollbar tutqich */
+.history-list::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 1rem;
 }

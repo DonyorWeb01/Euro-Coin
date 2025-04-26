@@ -10,12 +10,13 @@ import LoginModal from "./components/LoginModal";
 // 🔹 O‘qituvchi sahifalari
 import TeacherHome from "./pages/TeacherHome";
 import StudentsList from "./pages/StudentsList";
-import TeacherCreateTest from "./pages/TeacherCreatetest";
+import TeacherCreateTest from "./pages/TeacherCreateTest";
 
 
 // 🔹 Admin sahifalari
 import AdminPanel from "./pages/AdminPanel";
 import UsersList from "./pages/UsersList";
+import Header1 from "./components/Header1";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -41,6 +42,7 @@ const App = () => {
 
       <div className={isLoggedIn ? "app" : "blur"}>
         <Header userRole={userRole} />
+        <Header1 userRole={userRole}/>
         <main className="main">
           <Routes>
             {/* 👨‍🎓 Talaba sahifalari */}

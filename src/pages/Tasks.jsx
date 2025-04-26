@@ -170,8 +170,8 @@ const Tasks = () => {
       </div>
 
       {showStartConfirm && (
-        <div className="modal-overlay">
-          <div className="modal-content">
+        <div className="modal-overlay1">
+          <div className="modal-content1">
             <h2>⚠️ Diqqat!</h2>
             <p>Ushbu testni faqat bir marta ishlash imkoniyatingiz bor. Boshlashga ishonchingiz komilmi?</p>
             <div className="btns1" style={{ marginTop: "1rem" }}>
@@ -186,49 +186,57 @@ const Tasks = () => {
         </div>
       )}
 
-      {showModal && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <h2>🧠 Test Savollari</h2>
-            <p>⏳ Qolgan vaqt: <strong>{formatTime(timeLeft)}</strong></p>
-            <ul>
-              {selectedQuestions.map((q) => (
-                <li key={q.id}>
-                  <p><strong>{q.text}</strong></p>
-                  <ul>
-                    {answers
-                      .filter((ans) => ans.question === q.id)
-                      .map((ans) => (
-                        <li key={ans.id}>
-                          <label>
-                            <input
-                              type="radio"
-                              name={`question-${q.id}`}
-                              checked={selectedAnswers[q.id] === ans.id}
-                              onChange={() => handleAnswerSelect(q.id, ans.id)}
-                            />
-                            {ans.label}. {ans.text}
-                          </label>
-                        </li>
-                      ))}
-                  </ul>
-                </li>
-              ))}
-            </ul>
-            <div className="btns1">
-            <button className="btn submit-btn" onClick={handleSubmit}>
-              Yuborish
-            </button>
-            <button className="btn close-btn" onClick={() => {
-              setShowModal(false);
-              if (timer) clearInterval(timer);
-            }}>
-              Yopish
-            </button>
-            </div>
-          </div>
-        </div>
-      )}
+{showModal && (
+  <div className="modal-overlay">
+    <div className="modal-content">
+      <h2>🧠 Test Savollari</h2>
+      <p>⏳ Qolgan vaqt: <strong>{formatTime(timeLeft)}</strong></p>
+      <div className="questions-list">
+  <ul>
+    {selectedQuestions.map((q) => (
+      <li key={q.id}>
+        <p>{q.text}</p>
+        <ul>
+          {answers
+            .filter((ans) => ans.question === q.id)
+            .map((ans) => (
+              <li key={ans.id}>
+                <label onClick={() => handleAnswerSelect(q.id, ans.id)}>
+                  <input
+                    type="radio"
+                    name={`question-${q.id}`}
+                    checked={selectedAnswers[q.id] === ans.id}
+                    readOnly
+                  />
+                  {ans.label}. {ans.text}
+                </label>
+              </li>
+            ))}
+        </ul>
+      </li>
+    ))}
+  </ul>
+</div>
+
+
+      <div className="modal-buttons">
+        <button className="btn submit-btn" onClick={handleSubmit}>
+          ✅ Yuborish
+        </button>
+        <button
+          className="btn close-btn"
+          onClick={() => {
+            setShowModal(false);
+            if (timer) clearInterval(timer);
+          }}
+        >
+          ❌ Yopish
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
 
       {showResultModal && resultData && (
         <div className="modal-overlay">
