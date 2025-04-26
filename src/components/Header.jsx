@@ -49,7 +49,7 @@ const Header = ({ userRole }) => {
       <div className="top">
       <div className="logo">
         <Link to="/">
-          <img className="logoImg" src="./public/icon.png" alt="logo" />
+          <img className="logoImg" src="/icon.png" alt="logo" />
           <p className="logoName">EURO COIN</p>
         </Link>
       </div>
