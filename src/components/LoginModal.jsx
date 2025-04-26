@@ -48,7 +48,7 @@ const LoginModal = ({ onLogin }) => {
 
   return (
     <div className="login">
-    <img className="login-img" src="./public/icon.png" alt="" />
+    <img className="login-img" src="/icon.png" alt="" />
     <div className="login-modal">
       <form onSubmit={handleSubmit}>
         <h2>EURO COIN</h2>
