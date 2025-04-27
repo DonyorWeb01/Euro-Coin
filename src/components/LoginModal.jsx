@@ -10,10 +10,11 @@ const LoginModal = ({ onLogin }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!email || !password) {
-      setError("Iltimos, barcha maydonlarni to‘ldiring");
+    if (!email || !password || !role) {
+      setError("Iltimos, barcha maydonlarni to‘ldiring va rolni tanlang");
       return;
     }
+    
 
     try {
       const response = await fetch("https://coinsite.pythonanywhere.com/token/", {
@@ -65,10 +66,12 @@ const LoginModal = ({ onLogin }) => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <select value={role} onChange={(e) => setRole(e.target.value)}>
+          <option value="">Rolni tanlang</option>
           <option value="student">O‘quvchi</option>
           <option value="teacher">O‘qituvchi</option>
           <option value="admin">Admin</option>
         </select>
+
         {error && <p className="error">{error}</p>}
         <button type="submit">Kirish</button>
       </form>

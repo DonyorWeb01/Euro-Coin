@@ -4,12 +4,12 @@
   padding: 2rem;
   font-family: sans-serif;
   margin-top: 5rem;
-  // margin-left: 250px;
- 
+
   .page-title {
-    // text-align: center;
     margin-bottom: 2rem;
     color: #1e1e1e;
+    font-size: 2rem;
+    text-align: center;
   }
 
   .profile-card {
@@ -20,6 +20,9 @@
     padding: 2rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     .avatar {
       width: 200px;
@@ -27,41 +30,71 @@
       border-radius: 50%;
       object-fit: cover;
       margin-bottom: 1rem;
+      transition: all 0.3s ease; // Sekin animatsiya
     }
 
     .name {
       font-size: 2.5rem;
       margin-bottom: 1rem;
+      font-weight: 600;
+      color: #333;
     }
 
     .info-box {
       margin-top: 1rem;
       background: rgba(255, 255, 255, 0.3);
       backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px); // Safari uchun
+      -webkit-backdrop-filter: blur(10px);
       border-radius: 10px;
-      overflow: hidden;
       padding: 1rem;
-      text-align-last: left;
+      width: 100%;
+      text-align: left;
 
       .highlight-box {
         p {
           margin: 0.5rem 0;
+          font-size: 1rem;
+          color: #555;
         }
       }
     }
 
-    .edit-btn {
+    .profi-btns {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
       margin-top: 1.5rem;
-      padding: 0.6rem 1.2rem;
-      background-color: #b336b1;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
+      flex-wrap: wrap; // Kichik ekranlarda buttonlar pastga tushadi
 
-      &:hover {
-        background-color: #92379b;
+      .edit-btn,
+      .logout-btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 1rem;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        min-width: 120px;
+        text-align: center;
+      }
+
+      .edit-btn {
+        background-color: #b336b1;
+        color: white;
+
+        &:hover {
+          background-color: #92379b;
+        }
+      }
+
+      .logout-btn {
+        background-color: #d42828;
+        color: white;
+
+        &:hover {
+          background-color: #ff0000;
+        }
       }
     }
   }
@@ -76,6 +109,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 1000;
 
     .modal {
       background: white;
@@ -83,6 +117,7 @@
       border-radius: 16px;
       max-width: 400px;
       width: 90%;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 
       label {
         display: block;
@@ -95,53 +130,146 @@
           margin-top: 0.4rem;
           border-radius: 8px;
           border: 1px solid #ccc;
+          font-size: 1rem;
         }
       }
 
       .modal-buttons {
         display: flex;
         justify-content: space-between;
+        margin-top: 1rem;
 
         button {
           padding: 0.5rem 1rem;
           border-radius: 8px;
           border: none;
           cursor: pointer;
+          font-size: 1rem;
+          transition: background-color 0.3s ease;
         }
 
         button:first-child {
           background-color: #28a745;
           color: white;
+
+          &:hover {
+            background-color: #218838;
+          }
         }
 
         button:last-child {
           background-color: #dc3545;
           color: white;
+
+          &:hover {
+            background-color: #c82333;
+          }
         }
       }
     }
   }
 }
 
-// Responsive
-@media (max-width: 500px) {
-  .profile-card {
-    padding: 1rem;
-
-    .name {
-      font-size: 1.2rem;
-    }
-
-    .edit-btn {
-      width: 100%;
-    }
-  }
-}
-
-
-.profile-page1{
+// Profile page variant
+.profile-page1 {
   height: 84vh;
   max-width: 1600px;
   margin-left: 250px;
   margin-top: 5rem;
+}
+
+// RESPONSIVE DESIGN 🎯
+
+// Tablet (768px va pastroq)
+@media (max-width: 768px) {
+  .profile-page {
+    padding: 1rem;
+
+    .profile-card {
+      padding: 1.5rem;
+
+      .avatar {
+        width: 150px;
+        height: 150px;
+      }
+
+      .name {
+        font-size: 2rem;
+      }
+
+      .profi-btns {
+        gap: 0.8rem;
+
+        .edit-btn,
+        .logout-btn {
+          font-size: 0.9rem;
+          padding: 0.5rem 1rem;
+        }
+      }
+    }
+  }
+}
+
+// Mobil (500px va pastroq)
+@media (max-width: 500px) {
+  .profile-page {
+    .profile-card {
+      padding: 1rem;
+
+      .avatar {
+        width: 120px;
+        height: 120px;
+      }
+
+      .name {
+        font-size: 1.6rem;
+      }
+
+      .info-box {
+        .highlight-box p {
+          font-size: 0.9rem;
+        }
+      }
+
+      .profi-btns {
+        flex-direction: column;
+        gap: 0.5rem;
+
+        .edit-btn,
+        .logout-btn {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+// Juda kichik telefonlar uchun (360px va pastroq)
+@media (max-width: 400px) {
+  .profile-page {
+    .profile-card {
+      padding: 0.8rem;
+
+      .avatar {
+        width: 100px;
+        height: 100px;
+      }
+
+      .name {
+        font-size: 1.4rem;
+      }
+
+      .info-box {
+        padding: 0.8rem;
+      }
+
+      .profi-btns {
+        .edit-btn,
+        .logout-btn {
+          padding: 0.5rem;
+          font-size: 0.85rem;
+        }
+      }
+    }
+  }
 }

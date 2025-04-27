@@ -8,6 +8,7 @@ import { CiCirclePlus } from "react-icons/ci";
 const Header = ({ userRole }) => {
   const [userName, setUserName] = useState("");
   const [userCoins, setUserCoins] = useState(null);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const token = localStorage.getItem("token");
 
   useEffect(() => {
@@ -44,52 +45,70 @@ const Header = ({ userRole }) => {
     fetchUserData();
   }, [userRole, token]);
 
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+    console.log("salom"); // Sidebarni ochish yoki yopish
+  };
+
+  
+  
+
   return (
-    <aside className="sidebar">
-      <div className="top">
-      <div className="logo">
-        <Link to="/">
-          <img className="logoImg" src="/icon.png" alt="logo" />
-          <p className="logoName">EURO COIN</p>
-        </Link>
+    <div>
+      {/* Hamburger Button */}
+      <div className="hamburger" onClick={toggleSidebar}>
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
 
-      <nav className="nav-links">
-        {userRole === "student" && (
-          <>
-            <Link to="/"><FaHome /> Bosh sahifa</Link>
-            <Link to="/tasks"><PiStudentBold /> Topshiriqlar</Link>
-            <Link to="/profile"><FaUser /> Profil</Link>
-          </>
-        )}
+      {/* Sidebar */}
+      <aside className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
+        <div className="top">
+          <div className="logo">
+            <Link to="/">
+              <img className="logoImg" src="/icon.png" alt="logo" />
+              <p className="logoName">EURO COIN</p>
+            </Link>
+          </div>
 
-        {userRole === "teacher" && (
-          <>
-            <Link to="/"><FaHome /> Bosh sahifa</Link>
-            <Link to="/students"><PiStudentBold /> Talabalar</Link>
-            <Link to="/createTest"><FaPlus /> Test yaratish</Link>
-            <Link to="/profile"><FaUser /> Profil</Link>
-          </>
-        )}
+          <nav className="nav-links">
+            {userRole === "student" && (
+              <>
+                <Link to="/"><FaHome /> Bosh sahifa</Link>
+                <Link to="/tasks"><PiStudentBold /> Topshiriqlar</Link>
+                <Link to="/profile"><FaUser /> Profil</Link>
+              </>
+            )}
 
-        {userRole === "admin" && (
-          <>
-            <Link to="/"><FaHome /> Bosh sahifa</Link>
-            <Link to="/users"><FaUsers /> Foydalanuvchilar</Link>
-          </>
-        )}
-      </nav>
-      </div>
+            {userRole === "teacher" && (
+              <>
+                <Link to="/"><FaHome /> Bosh sahifa</Link>
+                <Link to="/students"><PiStudentBold /> Talabalar</Link>
+                <Link to="/createTest"><FaPlus /> Test yaratish</Link>
+                <Link to="/profile"><FaUser /> Profil</Link>
+              </>
+            )}
 
-      <div className="user-info">
-      {(userRole === "student" || userRole === "teacher") && (
-          <span className="user"> {userName}</span>
-        )}
-        {userRole === "student" && (
-          <span className="coins"> {userCoins}🪙</span>
-        )}
-      </div>
-    </aside>
+            {userRole === "admin" && (
+              <>
+                <Link to="/"><FaHome /> Bosh sahifa</Link>
+                <Link to="/users"><FaUsers /> Foydalanuvchilar</Link>
+              </>
+            )}
+          </nav>
+        </div>
+
+        <div className="user-info">
+          {(userRole === "student" || userRole === "teacher") && (
+            <span className="user"> {userName}</span>
+          )}
+          {userRole === "student" && (
+            <span className="coins"> {userCoins}🪙</span>
+          )}
+        </div>
+      </aside>
+    </div>
   );
 };
 

@@ -3,7 +3,7 @@
   font-family: sans-serif;
   background: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px); // Safari uchun
+  -webkit-backdrop-filter: blur(10px);
   border-radius: 20px;
   min-height: 85vh;
   margin-top: 4rem;
@@ -26,27 +26,27 @@
       width: 250px;
       background: rgba(255, 255, 255, 0.3);
       backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px); // Safari uchun
+      -webkit-backdrop-filter: blur(10px);
       display: flex;
-      flex-direction: column;  // Flexboxni ustun qilib belgilash
-      justify-content: space-between; // Ma'lumotlar orasidagi bo'shliqni taqsimlash
-      height: 100%; // To'liq balandlikni olish
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
 
       .task-header {
         font-weight: bold;
         margin-bottom: 10px;
-        white-space: nowrap; // Nomni qirqmaslik
+        white-space: nowrap;
         overflow: hidden;
-        text-overflow: ellipsis; // Agar nom uzun bo'lsa, nuqta bilan qisqartirish
+        text-overflow: ellipsis;
       }
 
       .desc,
       .duration {
         font-size: 16px;
         margin: 4px 0;
-        overflow: hidden; // Matn uzun bo'lsa, ortiqcha qismni yashirish
-        text-overflow: ellipsis; // Agar matn uzun bo'lsa, nuqta bilan qisqartirish
-        white-space: nowrap; // Barcha matnlar bir qatorga sig'dirish
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       .btn {
@@ -57,7 +57,7 @@
         border-radius: 4px;
         cursor: pointer;
         margin-top: 10px;
-        margin-bottom: 10px; // Karta pastidagi bo'shliqni saqlash
+        margin-bottom: 10px;
 
         &:hover {
           background-color: #92379b;
@@ -66,51 +66,6 @@
     }
   }
 
-  // .modal-overlay {
-  //   position: fixed;
-  //   top: 0;
-  //   left: 0;
-  //   right: 0;
-  //   bottom: 0;
-  //   background: rgba(255, 255, 255, 0.3);
-  //   backdrop-filter: blur(10px);
-  //   -webkit-backdrop-filter: blur(10px); // Safari uchun
-  //   display: flex;
-  //   justify-content: center;
-  //   align-items: center;
-  //   z-index: 1000;
-  //   border-radius: 20px;
-  //   overflow: hidden;
-
-  //   .modal-content {
-  //     background: white;
-  //     padding: 20px;
-  //     border-radius: 10px;
-  //     max-width: 600px;
-  //     width: 100%;
-
-  //     h2 {
-  //       margin-bottom: 15px;
-  //     }
-
-  //     ul {
-  //       padding-left: 20px;
-  //       margin-bottom: 20px;
-
-  //       li {
-  //         margin-bottom: 8px;
-  //       }
-  //     }
-
-  //     .close-btn {
-  //       background-color: #f44336;
-
-  //       &:hover {
-  //         background-color: #d32f2f;
-  //       }
-  //     }
-  //   }
-  // }
   .modal-overlay {
     position: fixed;
     top: 0;
@@ -124,7 +79,7 @@
     z-index: 1001;
     border-radius: 20px;
   }
-  
+
   .modal-content {
     width: 90%;
     max-width: 800px;
@@ -136,58 +91,58 @@
     flex-direction: column;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
     overflow: hidden;
-  
+
     h2 {
       font-size: 2rem;
       margin-bottom: 1rem;
       color: #333;
       text-align: center;
     }
-  
+
     p {
       text-align: center;
       margin-bottom: 1rem;
       font-size: 1.1rem;
-  
+
       strong {
         color: #e63946;
       }
     }
-  
+
     .questions-list {
       flex: 1;
       overflow-y: auto;
       padding-right: 10px;
-  
+
       ul {
         list-style: none;
         padding: 0;
-  
+
         li {
           background: #f9f9f9;
           padding: 1rem;
           border-radius: 0.8rem;
           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
           margin-bottom: 1.5rem;
-  
+
           p {
             font-weight: bold;
             margin-bottom: 0.8rem;
             color: #222;
           }
-  
+
           ul {
             list-style: none;
             padding: 0;
-  
+
             li {
               margin-bottom: 0.5rem;
-  
+
               label {
                 cursor: pointer;
                 font-size: 1rem;
                 color: #555;
-  
+
                 input[type="radio"] {
                   margin-right: 8px;
                 }
@@ -197,12 +152,14 @@
         }
       }
     }
-  
+
     .modal-buttons {
       display: flex;
-      justify-content: space-between;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
       margin-top: 1.5rem;
-  
+
       .btn {
         padding: 0.8rem 1.5rem;
         font-size: 1rem;
@@ -211,18 +168,18 @@
         cursor: pointer;
         color: #fff;
         transition: background-color 0.3s ease;
-  
+
         &.submit-btn {
           background-color: #38b000;
-  
+
           &:hover {
             background-color: #2d8600;
           }
         }
-  
+
         &.close-btn {
           background-color: #d00000;
-  
+
           &:hover {
             background-color: #a00000;
           }
@@ -230,12 +187,13 @@
       }
     }
   }
-  
 
   .btns1 {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
   }
 
   .task-card.disabled {
@@ -251,8 +209,7 @@
   }
 }
 
-
-.modal-overlay1{
+.modal-overlay1 {
   position: fixed;
   top: 0;
   left: 0;
@@ -264,7 +221,8 @@
   align-items: center;
   z-index: 1001;
   border-radius: 20px;
-  .modal-content1{
+
+  .modal-content1 {
     background-color: #fff;
     padding: 10px;
     border-radius: 20px;
@@ -272,6 +230,7 @@
     flex-direction: column;
     max-width: 500px;
     gap: 10px;
+    width: 90%;
   }
 }
 
@@ -288,5 +247,61 @@
 
   &:hover {
     background-color: #2d8600;
+  }
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+  .task-page {
+    margin-left: 0;
+    padding: 20px;
+  }
+
+  .task-list {
+    justify-content: center;
+
+    .task-card {
+      width: 200px;
+    }
+  }
+
+  .modal-content {
+    height: 90vh;
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .task-page {
+    padding: 15px;
+  }
+
+  .page-title {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .task-list {
+    gap: 15px;
+
+    .task-card {
+      width: 100%;
+      padding: 12px;
+    }
+  }
+
+  .modal-content {
+    padding: 1rem;
+    h2 {
+      font-size: 1.5rem;
+    }
+    p {
+      font-size: 1rem;
+    }
+  }
+
+  .btns1 {
+    flex-direction: column;
+    align-items: stretch;
   }
 }

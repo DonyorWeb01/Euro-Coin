@@ -1,28 +1,401 @@
-
-// Home.scss
 .page-home {
-  padding: 2rem;
-  max-width: 1600px;
-  margin-top: 4rem;
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  margin-top: 5rem;
   margin-left: 250px;
-  height: 85vh;
+}
 
-  .content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    margin: 2rem 0;
+.welcome {
+  text-align: center;
+  margin-bottom: 30px;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); // Safari uchun
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.welcome-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-image img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.user-info {
+  text-align: left;
+}
+
+.bio {
+  font-style: italic;
+  color: #1e1e1e;
+}
+
+.birthdate {
+  color: #1e1e1e;
+  margin-top: 10px;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.home-section {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.attendance,
+.rewards {
+  width: 48%;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); // Safari uchun
+  padding: 10px;
+  border-radius: 20px;
+}
+
+.history-list {
+  list-style-type: none;
+  padding: 0;
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
+.history-list::-webkit-scrollbar {
+  height: 12px;
+}
+
+.history-list::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 1rem;
+}
+
+.history-list::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 1rem;
+}
+
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ddd;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); // Safari uchun
+  border-radius: 5px;
+  margin-right: 5px;
+}
+
+.icon {
+  font-size: 24px;
+}
+
+.info {
+  flex-grow: 1;
+  padding-left: 10px;
+}
+
+.amount {
+  font-weight: bold;
+  color: green;
+}
+
+.type {
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.desc {
+  margin-top: 5px;
+}
+
+.rewards-title {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #1e1e1e;
+}
+
+.scroll-wrapper {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.scroll-wrapper::-webkit-scrollbar {
+  height: 12px;
+}
+
+.scroll-wrapper::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 1rem;
+}
+
+.scroll-wrapper::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 1rem;
+}
+
+.reward-list {
+  display: flex;
+  gap: 20px;
+  animation: scrollRewards 15s linear infinite;
+  margin-bottom: 5px;
+}
+
+.reward-card {
+  width: 250px;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); // Safari uchun
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.reward-img {
+  width: 200px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.reward-info {
+  margin-top: 10px;
+}
+
+.reward-name {
+  font-weight: bold;
+  max-width: 190px;
+  white-space: nowrap;        /* Matnni bir qatorda saqlaydi */
+  overflow: hidden;           /* Ortga chiqadigan matnni yashiradi */
+  text-overflow: ellipsis;    /* Matn qirqilib, oxiriga uch nuqta qo'shadi */
+}
+
+.reward-price,
+.reward-amount {
+  color: #1e1e1e;
+  margin-top: 6px;
+}
+
+.no-rewards {
+  text-align: center;
+  color: #888;
+}
+
+@keyframes scrollRewards {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@media (max-width: 1200px) {
+
+  .reward-card {
+    width: 200px;
+    padding: 12px;
   }
 
-  .section-title {
-    font-size: 1.8rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
+  .reward-img {
+    width: 180px;
+    height: 230px;
   }
 
-  @media (max-width: 768px) {
-    .content {
-      grid-template-columns: 1fr;
-    }
+  .reward-name {
+    max-width: 170px;
+  }
+
+  .history-item {
+    padding: 8px;
+  }
+
+  .amount {
+    font-size: 14px;
+  }
+
+  .reward-price,
+  .reward-amount {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 992px) {
+
+  .reward-card {
+    width: 180px;
+    padding: 10px;
+  }
+
+  .reward-img {
+    width: 160px;
+    height: 200px;
+  }
+
+  .reward-name {
+    max-width: 150px;
+  }
+
+  .history-item {
+    padding: 6px;
+  }
+
+  .amount {
+    font-size: 12px;
+  }
+
+  .reward-price,
+  .reward-amount {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-home {
+    margin-top: 50px;
+    margin-left: 0px; /* Mobil uchun margin */
+  }
+
+  .home-section {
+    flex-direction: column;
+  }
+
+  .attendance,
+  .rewards {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .history-list{
+    max-height: 300px;
+  }
+
+  .reward-list {
+    gap: 10px;
+  }
+
+  .reward-card {
+    width: 120px;
+    padding: 10px;
+  }
+
+  .reward-img {
+    width: 100px;
+    height: 140px;
+  }
+
+  .reward-name {
+    max-width: 100%;
+    font-size: 14px;
+  }
+
+  .history-item {
+    padding: 4px;
+    font-size: 12px;
+  }
+
+  .amount {
+    font-size: 14px;
+  }
+
+  .reward-price,
+  .reward-amount {
+    font-size: 10px;
+  }
+
+  .user-image img {
+    width: 70px;
+    height: 70px;
+  }
+
+  .bio,
+  .birthdate {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 500px) {
+  .attendance,
+  .rewards {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .history-list{
+    max-height: 250px;
+  }
+
+  .history-item{
+    padding: 5px;
+  }
+
+  .icon{
+    font-size: 17px;
+  }
+
+  .type{
+    font-size: 14px;
+  }
+
+  .desc{
+    font-size: 8px;
+  }
+
+  .amount{
+    font-size: 10px;
+  }
+
+  .reward-list {
+    gap: 10px;
+  }
+
+  .reward-card {
+    width: 100px;
+    padding: 5px;
+  }
+
+  .reward-img {
+    width: 80px;
+    height: 120px;
+  }
+
+  .reward-name {
+    max-width: 100%;
+    font-size: 10px;
+  }
+
+  .reward-price,
+  .reward-amount {
+    font-size: 10px;
+    margin-top: 2px;
+  }
+
+  .user-image img {
+    width: 70px;
+    height: 70px;
+  }
+
+  .userName{
+    font-size: 16px;
+  }
+
+  .bio,
+  .birthdate {
+    font-size: 10px;
   }
 }

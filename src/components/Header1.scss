@@ -1,44 +1,41 @@
 .header {
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.3);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px); // Safari uchun
-    color: #1e1e1e;
-    padding: 20px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 88%;
-    z-index: 100;
-    margin-left: 240px;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); // Safari uchun
+  color: #1e1e1e;
+  padding: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 88%;
+  z-index: 100;
+  margin-left: 240px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.header-right .user-name {
+  margin-right: 20px;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.header-right .user-coins {
+  font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+  .header {
+    display: none;  // 768px dan kichik ekranlarda butunlay yashirish
   }
-  
-  
+
   .header-right {
-    display: flex;
-    align-items: center;
+    margin-top: 10px;
   }
-  
-  .header-right .user-name {
-    margin-right: 20px;
-    font-size: 1.1rem;
-    font-weight: bold;
-  }
-  
-  .header-right .user-coins {
-    font-size: 1.1rem;
-  }
-  
-  @media (max-width: 768px) {
-    .header {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  
-    .header-right {
-      margin-top: 10px;
-    }
-  }
-  
+}

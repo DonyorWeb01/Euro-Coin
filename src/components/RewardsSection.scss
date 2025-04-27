@@ -5,7 +5,7 @@
   -webkit-backdrop-filter: blur(10px);
   border-radius: 1rem;
   max-width: 67%;
-  overflow: hidden; // to'xtatish uchun
+  overflow: hidden;
 
   .rewards-title {
     font-size: 1.8rem;
@@ -77,7 +77,6 @@
   }
 }
 
-/* Scrollbar orqa fon rangi */
 .rewards::-webkit-scrollbar-track {
   background: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(10px);
@@ -85,23 +84,40 @@
   border-radius: 10px;
 }
 
-/* Scrollbar "thumb" (tutqich) rangi */
 .rewards::-webkit-scrollbar-thumb {
   background: rgba(0, 0, 0, 0.4);
   border-radius: 1rem;
 }
 
-/* Hover qilinganda thumb o'zgarishi */
 .rewards::-webkit-scrollbar-thumb:hover {
   background: rgba(0, 0, 0, 0.6);
 }
 
-/* Animatsiya kaliti */
 @keyframes scroll {
   0% {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-100%); /* 100% ga qaytganda yana yangi cardlar chiqib keladi */
+    transform: translateX(-100%);
+  }
+}
+
+@media (max-width: 768px) {
+  .rewards {
+    max-width: 100%;
+    padding: 1rem;
+  }
+
+  .reward-card {
+    width: 150px;
+  }
+
+  .reward-list {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .reward-info {
+    gap: 4px;
   }
 }
