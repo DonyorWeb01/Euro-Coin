@@ -7,8 +7,8 @@
   margin-left: 250px;
   padding: 30px;
   background: rgba(255, 255, 255, 0.3);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px); // Safari uchun
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); // Safari uchun
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   font-family: "Inter", sans-serif;
@@ -47,9 +47,11 @@
     gap: 20px;
 
     .task-card {
+      width: 100%; /* Task card to'liq kenglikni egallaydi */
+      box-sizing: border-box; /* Kenglikni to'g'ri hisoblash uchun */
       background: rgba(255, 255, 255, 0.3);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px); // Safari uchun
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px); // Safari uchun
       border: 1px solid #e2e8f0;
       border-radius: 12px;
       padding: 20px;
@@ -91,8 +93,8 @@
       outline: none;
       transition: 0.2s ease;
       background: rgba(255, 255, 255, 0.3);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px); // Safari uchun
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px); // Safari uchun
 
       &:focus {
         border-color: #3182ce;
@@ -116,7 +118,7 @@
       transition: background-color 0.3s ease;
 
       &:hover {
-        background-color: #92379b;;
+        background-color: #92379b;
       }
     }
 
@@ -193,24 +195,209 @@
   }
 }
 
+/* Media Queries for responsive design */
+@media (max-width: 1600px) {
+  .teacher-panel {
+    padding: 25px;
+  }
 
-.buttons {
-  display: flex;
-  gap: 10px;
-  margin-top: 15px;
+  .tabs button {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
 
-  button {
-    padding: 10px 15px;
+  .task-card h2 {
+    font-size: 18px;
+  }
+
+  .task-card p {
+    font-size: 14px;
+  }
+
+  .test-section h3 {
     font-size: 16px;
-    border: none;
-    background-color: #3498db;
-    color: white;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  }
 
-    &:hover {
-      background-color: #2980b9;
-    }
+  input,
+  textarea {
+    font-size: 14px;
+  }
+
+  .submit-btn {
+    font-size: 14px;
+    padding: 10px 18px;
+  }
+
+  .test-block label {
+    font-size: 14px;
+  }
+
+  .buttons button {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 1024px) {
+
+  .tabs button {
+    font-size: 12px;
+    padding: 8px 16px;
+  }
+
+  .task-card h2 {
+    font-size: 16px;
+  }
+
+  .task-card p {
+    font-size: 12px;
+  }
+
+  .test-section h3 {
+    font-size: 14px;
+  }
+
+  input,
+  textarea {
+    font-size: 12px;
+  }
+
+  .submit-btn {
+    font-size: 12px;
+    padding: 8px 16px;
+  }
+
+  .test-block label {
+    font-size: 12px;
+  }
+
+  .buttons button {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .teacher-panel {
+    padding: 15px;
+    margin-left: 10px;
+  }
+
+  .tabs button {
+    font-size: 10px;
+    padding: 6px 12px;
+  }
+
+  .task-card h2 {
+    font-size: 14px;
+  }
+
+  .task-card p {
+    font-size: 10px;
+  }
+
+  .test-section h3 {
+    font-size: 12px;
+  }
+
+  input,
+  textarea {
+    font-size: 10px;
+  }
+
+  .submit-btn {
+    font-size: 10px;
+    padding: 6px 12px;
+  }
+
+  .test-block label {
+    font-size: 10px;
+  }
+
+  .buttons button {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 485px) {
+  .teacher-panel {
+    padding: 10px;
+    margin-left: 5px;
+  }
+
+  #btn1 {
+    font-size: 12px;
+    padding: 5px 8px;
+  }
+
+  .task-card h2 {
+    font-size: 12px;
+  }
+
+  .task-card p {
+    font-size: 9px;
+  }
+
+  .test-section h3 {
+    font-size: 10px;
+  }
+
+  input,
+  textarea {
+    font-size: 9px;
+  }
+
+  .submit-btn {
+    font-size: 9px;
+    padding: 5px 10px;
+  }
+
+  .test-block label {
+    font-size: 9px;
+  }
+
+  .buttons button {
+    font-size: 9px;
+    padding: 5px 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  .teacher-panel {
+    padding: 8px;
+  }
+
+  .tabs button {
+    font-size: 8px;
+    padding: 4px 5px;
+  }
+
+  .task-card h2 {
+    font-size: 10px;
+  }
+
+  .task-card p {
+    font-size: 8px;
+  }
+
+  .test-section h3 {
+    font-size: 9px;
+  }
+
+  input,
+  textarea {
+    font-size: 8px;
+  }
+
+  .submit-btn {
+    font-size: 8px;
+    padding: 4px 8px;
+  }
+
+  .test-block label {
+    font-size: 8px;
+  }
+
+  .buttons button {
+    font-size: 8px;
+    padding: 4px 8px;
   }
 }

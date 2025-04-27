@@ -4,6 +4,7 @@
   padding: 2rem;
   font-family: sans-serif;
   margin-top: 5rem;
+  margin-left: 250px;
 
   .page-title {
     margin-bottom: 2rem;
@@ -184,6 +185,7 @@
 @media (max-width: 768px) {
   .profile-page {
     padding: 1rem;
+    margin-left: 0px;
 
     .profile-card {
       padding: 1.5rem;
@@ -212,7 +214,11 @@
 
 // Mobil (500px va pastroq)
 @media (max-width: 500px) {
+
   .profile-page {
+    .page-title{
+      font-size: 20px;
+    }
     .profile-card {
       padding: 1rem;
 

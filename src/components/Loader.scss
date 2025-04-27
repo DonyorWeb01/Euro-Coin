@@ -1,0 +1,106 @@
+.loader-container {
+    min-height: 83vh;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    Webkit-backdrop-filter: blur(10px); /* Safari uchun */
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0 auto;
+  
+    /* Loader circle styles */
+    .loader-circle {
+      width: 60px;
+      height: 60px;
+      border: 6px solid #ccc;
+      border-top: 6px solid #4A90E2;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+  
+    /* Heading styles */
+    h3 {
+      font-size: 20px;
+      margin-top: 15px; /* Ensures spacing from the loader circle */
+      text-align: center; /* Centers text */
+    }
+  
+    /* Spin animation */
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  
+    /* Media Queries for responsiveness */
+  
+    /* Tablets (max-width: 1024px) */
+    @media (max-width: 1024px) {
+      padding: 15px;
+  
+      .loader-circle {
+        width: 50px;
+        height: 50px;
+        border: 5px solid #ccc;
+        border-top: 5px solid #4A90E2;
+      }
+  
+      h3 {
+        font-size: 18px;
+      }
+    }
+  
+    /* Mobile Landscape (max-width: 768px) */
+    @media (max-width: 768px) {
+      padding: 10px;
+  
+      .loader-circle {
+        width: 40px;
+        height: 40px;
+        border: 4px solid #ccc;
+        border-top: 4px solid #4A90E2;
+      }
+  
+      h3 {
+        font-size: 16px;
+      }
+    }
+  
+    /* Mobile (max-width: 480px) */
+    @media (max-width: 480px) {
+      padding: 8px;
+  
+      .loader-circle {
+        width: 30px;
+        height: 30px;
+        border: 3px solid #ccc;
+        border-top: 3px solid #4A90E2;
+      }
+  
+      h3 {
+        font-size: 14px;
+      }
+    }
+  
+    /* Small mobile (max-width: 360px) */
+    @media (max-width: 360px) {
+      padding: 6px;
+  
+      .loader-circle {
+        width: 25px;
+        height: 25px;
+        border: 2px solid #ccc;
+        border-top: 2px solid #4A90E2;
+      }
+  
+      h3 {
+        font-size: 12px;
+      }
+    }
+  }
+  

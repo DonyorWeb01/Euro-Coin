@@ -16,53 +16,201 @@
   .group-section {
     margin-bottom: 50px;
     background: rgba(255, 255, 255, 0.3);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px); // Safari uchun
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); // Safari uchun
     padding: 25px;
     border-radius: 16px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  
+
     h2 {
       font-size: 24px;
       margin-bottom: 20px;
-      // color: #3b82f6;
       color: #1e1e1e;
       border-left: 6px solid #1e1e1e;
       padding-left: 12px;
     }
-  
+
     table {
-      width: 100%; // bu yerda width 100% bo‘lsa, hamma jadval teng chiqadi
-      table-layout: fixed; // ustun kengligini barqaror qiladi
+      width: 100%;
+      table-layout: fixed;
       border-collapse: collapse;
       border-spacing: 0;
       overflow: hidden;
       border-radius: 10px;
-      min-width: 600px; 
       background: rgba(255, 255, 255, 0.3);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px); // Safari uchun// bu ixtiyoriy, ammo table juda tor chiqmasin deb
-  
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px); // Safari uchun
+      margin-top: 20px;
+
       th,
       td {
         padding: 14px 16px;
         text-align: left;
         word-wrap: break-word;
       }
-  
+
       th {
-        // background: rgba(255, 255, 255, 0);
-        // backdrop-filter: blur(10px);
-        // -webkit-backdrop-filter: blur(10px); // Safari uchun
         font-weight: 600;
         color: #1e1e1e;
         border-bottom: 2px solid #f7f7f7;
+        background: rgba(255, 255, 255, 0.4);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px); // Safari uchun
       }
-  
+
       td {
         border-bottom: 1px solid #e5e7eb;
       }
+
+      tr:nth-child(even) {
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      tr:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
     }
   }
-  
+
+  // Media queries
+
+  // Mobil ekranlar (max-width: 768px)
+  @media (max-width: 768px) {
+    margin-left: 0;
+    // padding: 20px;
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .group-section {
+      padding: 15px;
+      margin-bottom: 30px;
+    }
+
+    .group-section h2 {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+
+    table {
+      min-width: 100%;
+      font-size: 12px;
+    }
+
+    th,
+    td {
+      padding: 8px 10px;
+    }
+
+    td {
+      font-size: 12px;
+    }
+  }
+
+  // Kichik planshetlar (max-width: 1024px)
+  @media (max-width: 1024px) {
+    // margin-left: 0;
+    padding: 20px;
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 25px;
+    }
+
+    .group-section {
+      padding: 20px;
+      margin-bottom: 40px;
+    }
+
+    .group-section h2 {
+      font-size: 22px;
+      margin-bottom: 18px;
+    }
+
+    table {
+      min-width: 100%;
+      font-size: 14px;
+    }
+
+    th,
+    td {
+      padding: 10px 12px;
+    }
+
+    td {
+      font-size: 14px;
+    }
+  }
+
+  // Desktop ekranlar (min-width: 1600px)
+  @media (min-width: 1600px) {
+    margin-left: 250px;
+    padding: 40px;
+
+    h1 {
+      font-size: 32px;
+      margin-bottom: 30px;
+    }
+
+    .group-section {
+      padding: 25px;
+      margin-bottom: 50px;
+    }
+
+    .group-section h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    table {
+      min-width: 600px;
+      font-size: 16px;
+    }
+
+    th,
+    td {
+      padding: 14px 16px;
+    }
+
+    td {
+      font-size: 16px;
+    }
+  }
+
+  // Maksimal kichik ekranlar (max-width: 360px)
+  @media (max-width: 460px) {
+    margin-left: 0;
+    padding: 15px;
+
+    h1 {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+
+    .group-section {
+      padding: 12px;
+      margin-bottom: 20px;
+    }
+
+    .group-section h2 {
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+
+    table {
+      min-width: 100%;
+      font-size: 10px;
+    }
+
+    th,
+    td {
+      padding: 6px 8px;
+    }
+
+    td {
+      font-size: 10px;
+    }
+  }
 }

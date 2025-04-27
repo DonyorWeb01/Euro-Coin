@@ -1,8 +1,12 @@
 .users-list, .teacher-list {
   padding: 20px;
-  background-color: #f4f4f4;
+  background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); // Safari uchun
   height: 85vh;
   border-radius: 20px;
+  margin-left: 250px;
+  margin-top: 5rem;
 }
 
 .title {
@@ -59,4 +63,142 @@ button {
 
 button:hover {
   background-color: #0056b3;
+}
+
+/* Media Queries for responsiveness */
+
+/* Tablet and small desktop screens (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .section {
+    margin-bottom: 25px;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  table {
+    font-size: 0.9rem; /* Adjust text size for smaller screens */
+  }
+
+  th, td {
+    padding: 8px;
+    width: 25%; /* Make columns narrower */
+  }
+
+  .user-img {
+    width: 40px;
+    height: 40px;
+  }
+
+  button {
+    padding: 4px 8px;
+  }
+}
+
+/* Mobile landscape (max-width: 768px) */
+@media (max-width: 768px) {
+  .users-list, .teacher-list {
+    margin-left: 0px;
+  }
+
+  .title {
+    font-size: 1.6rem;
+  }
+
+  .section {
+    margin-bottom: 20px;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  table {
+    font-size: 0.85rem; /* Adjust text size further for smaller screens */
+  }
+
+  th, td {
+    padding: 6px;
+    width: 30%; /* Adjust column width */
+  }
+
+  .user-img {
+    width: 35px;
+    height: 35px;
+  }
+
+  button {
+    padding: 3px 6px;
+  }
+}
+
+/* Mobile screens (max-width: 480px) */
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.4rem;
+  }
+
+  .section {
+    margin-bottom: 15px;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  table {
+    font-size: 0.8rem; /* Adjust text size further for mobile */
+  }
+
+  th, td {
+    padding: 5px;
+    width: 40%; /* Adjust width for better mobile display */
+  }
+
+  .user-img {
+    width: 30px;
+    height: 30px;
+  }
+
+  button {
+    padding: 3px 5px;
+  }
+}
+
+/* Small mobile screens (max-width: 360px) */
+@media (max-width: 360px) {
+  .title {
+    font-size: 1.3rem;
+  }
+
+  .section {
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    font-size: 1.1rem;
+  }
+
+  table {
+    font-size: 0.75rem; /* Reduce text size further for small screens */
+  }
+
+  th, td {
+    padding: 4px;
+    width: 45%; /* Adjust width further */
+  }
+
+  .user-img {
+    width: 25px;
+    height: 25px;
+  }
+
+  button {
+    padding: 3px 4px;
+  }
 }

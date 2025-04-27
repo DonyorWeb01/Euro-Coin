@@ -119,10 +119,10 @@ const TeacherCreateTest = () => {
   return (
     <div className="teacher-panel">
       <div className="tabs">
-        <button onClick={() => setActiveTab("tasks")} className={activeTab === "tasks" ? "active" : ""}>
+        <button id="btn1" onClick={() => setActiveTab("tasks")} className={activeTab === "tasks" ? "active" : ""}>
         <BsFillQuestionSquareFill /> Mavjud testlar
         </button>
-        <button onClick={() => setActiveTab("tests")} className={activeTab === "tests" ? "active" : ""}>
+        <button id="btn1" onClick={() => setActiveTab("tests")} className={activeTab === "tests" ? "active" : ""}>
           🧪 Yangi test yaratish
         </button>
       </div>
