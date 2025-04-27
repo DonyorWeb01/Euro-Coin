@@ -1,5 +1,5 @@
 /* LoginModal.scss */
-.login{
+.login {
   position: fixed;
   top: 0;
   left: 0;
@@ -12,26 +12,28 @@
   height: 100vh;
   background: linear-gradient(to right, #eb74e9, #d540b2);
   z-index: 999;
-  
+  padding: 1rem;
 }
 
-.login-img{
+.login-img {
   width: 300px;
 }
+
 .login-modal {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 .login-modal form {
   background: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px); // Safari uchun
+  -webkit-backdrop-filter: blur(10px);
   padding: 3rem 2.5rem;
   border-radius: 1.5rem;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-  width: 800px;
+  width: 600px;
   max-width: 90%;
   display: flex;
   flex-direction: column;
@@ -66,7 +68,7 @@
   border-radius: 0.8rem;
   background: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px); // Safari uchun
+  -webkit-backdrop-filter: blur(10px);
   font-size: 1rem;
   transition: border-color 0.3s;
 }
@@ -96,4 +98,76 @@
 
 .login-modal button:hover {
   background-color: #9e2b9c;
+}
+
+/* --------- RESPONSIVE --------- */
+@media (max-width: 1024px) {
+  .login-img {
+    width: 250px;
+  }
+
+  .login-modal form {
+    width: 500px;
+    padding: 2.5rem 2rem;
+  }
+
+  .login-modal h2 {
+    font-size: 1.8rem;
+  }
+
+  .login-modal input,
+  .login-modal select {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .login-img {
+    width: 200px;
+  }
+
+  .login-modal form {
+    width: 400px;
+    padding: 2rem 1.5rem;
+  }
+
+  .login-modal h2 {
+    font-size: 1.6rem;
+  }
+
+  .login-modal input,
+  .login-modal select {
+    font-size: 0.9rem;
+  }
+
+  .login-modal button {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-img {
+    width: 150px;
+  }
+
+  .login-modal form {
+    width: 100%;
+    padding: 1.5rem 1rem;
+    border-radius: 1rem;
+  }
+
+  .login-modal h2 {
+    font-size: 1.4rem;
+  }
+
+  .login-modal input,
+  .login-modal select {
+    font-size: 0.85rem;
+    padding: 0.7rem 0.8rem;
+  }
+
+  .login-modal button {
+    font-size: 0.95rem;
+    padding: 0.8rem;
+  }
 }

@@ -1,10 +1,50 @@
 .footer {
   position: fixed;
   bottom: 0;
-  left: 40%;  
+  left: 50%; /* Markazdan */
+  transform: translateX(-50%); /* To'g'ri o'rtaga olish */
   margin-top: auto;
   color: #fff;
   text-align: center;
   padding: 1rem;
-  font-size: 0.9rem;
+  font-size: 1rem; /* Asosiy font o'lchami */
+  z-index: 100; /* Footer boshqa elementlar ustida chiqsin */
+  width: 100%; /* Katta ekranlar uchun */
+  max-width: 100%; /* Max widthni oshirib yubormaslik uchun */
+
+  p {
+    margin: 0; /* Text atrofida unnecessary margin bo'lmasin */
+  }
+}
+
+/* Responsiveness */
+@media (max-width: 1200px) {
+  .footer {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .footer {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .footer {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .footer {
+    font-size: 0.65rem;
+    padding: 0.8rem; /* Kichik ekran uchun paddingni ham ozgina kichraytiramiz */
+  }
 }

@@ -1,15 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./Header.scss";
 import { FaHome, FaPlus, FaUser, FaUsers } from "react-icons/fa";
 import { PiStudentBold } from "react-icons/pi";
-import { CiCirclePlus } from "react-icons/ci";
 
 const Header = ({ userRole }) => {
   const [userName, setUserName] = useState("");
   const [userCoins, setUserCoins] = useState(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const token = localStorage.getItem("token");
+  const location = useLocation(); // 🛑 Router location
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -45,13 +45,25 @@ const Header = ({ userRole }) => {
     fetchUserData();
   }, [userRole, token]);
 
+  // 🛑 Sahifa yuklanganda: Ekranni tekshirish
+  useEffect(() => {
+    if (window.innerWidth <= 768) {
+      setIsSidebarOpen(false); // Telefon: sidebar yopiq
+    } else {
+      setIsSidebarOpen(true); // Katta ekran: sidebar ochiq
+    }
+  }, []);
+
+  // 🛑 Har safar route o'zgarganda: Telefon bo'lsa sidebar yopilsin
+  useEffect(() => {
+    if (window.innerWidth <= 768) {
+      setIsSidebarOpen(false);
+    }
+  }, [location.pathname]);
+
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
-    console.log("salom"); // Sidebarni ochish yoki yopish
   };
-
-  
-  
 
   return (
     <div>
@@ -75,25 +87,43 @@ const Header = ({ userRole }) => {
           <nav className="nav-links">
             {userRole === "student" && (
               <>
-                <Link to="/"><FaHome /> Bosh sahifa</Link>
-                <Link to="/tasks"><PiStudentBold /> Topshiriqlar</Link>
-                <Link to="/profile"><FaUser /> Profil</Link>
+                <Link to="/" onClick={() => setIsSidebarOpen(false)}>
+                  <FaHome /> Bosh sahifa
+                </Link>
+                <Link to="/tasks" onClick={() => setIsSidebarOpen(false)}>
+                  <PiStudentBold /> Topshiriqlar
+                </Link>
+                <Link to="/profile" onClick={() => setIsSidebarOpen(false)}>
+                  <FaUser /> Profil
+                </Link>
               </>
             )}
 
             {userRole === "teacher" && (
               <>
-                <Link to="/"><FaHome /> Bosh sahifa</Link>
-                <Link to="/students"><PiStudentBold /> Talabalar</Link>
-                <Link to="/createTest"><FaPlus /> Test yaratish</Link>
-                <Link to="/profile"><FaUser /> Profil</Link>
+                <Link to="/" onClick={() => setIsSidebarOpen(false)}>
+                  <FaHome /> Bosh sahifa
+                </Link>
+                <Link to="/students" onClick={() => setIsSidebarOpen(false)}>
+                  <PiStudentBold /> Talabalar
+                </Link>
+                <Link to="/createTest" onClick={() => setIsSidebarOpen(false)}>
+                  <FaPlus /> Test yaratish
+                </Link>
+                <Link to="/profile" onClick={() => setIsSidebarOpen(false)}>
+                  <FaUser /> Profil
+                </Link>
               </>
             )}
 
             {userRole === "admin" && (
               <>
-                <Link to="/"><FaHome /> Bosh sahifa</Link>
-                <Link to="/users"><FaUsers /> Foydalanuvchilar</Link>
+                <Link to="/" onClick={() => setIsSidebarOpen(false)}>
+                  <FaHome /> Bosh sahifa
+                </Link>
+                <Link to="/users" onClick={() => setIsSidebarOpen(false)}>
+                  <FaUsers /> Foydalanuvchilar
+                </Link>
               </>
             )}
           </nav>
