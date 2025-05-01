@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./TeacherCreateTest.scss";
-import { IoMdArrowRoundBack } from "react-icons/io";
-import { GrFormNextLink } from "react-icons/gr";
 import { BsFillQuestionSquareFill } from "react-icons/bs";
 import { FaQuestion, FaRegEdit } from "react-icons/fa";
 
@@ -60,6 +58,7 @@ const TeacherCreateTest = () => {
         if (Array.isArray(testsData)) {
           const formattedTasks = testsData.map((test) => ({
             title: test.title,
+            id: test.id,
             description: test.description || "Tavsif mavjud emas.",
           }));
           setTasks(formattedTasks);
@@ -189,6 +188,56 @@ const TeacherCreateTest = () => {
     alert("✅ Test va savollar yaratildi. Mavjud testlarga qaytdingiz.");
   };
 
+  // Mavjud testlarni ko'rish!
+  const [selectedTest, setSelectedTest] = useState(null);
+  const [questions, setQuestions] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [modalOpen, setIsModalOpen] = useState(false);
+
+  const handleViewTest = async (taskId) => {
+    console.log("taskId kelyapti:", taskId); // tekshirib olamiz
+
+    if (!taskId) {
+      console.error("taskId topilmadi!");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      setSelectedTest(taskId);
+      setIsModalOpen(true);
+
+      const myHeaders = new Headers();
+      myHeaders.append("Authorization", `Bearer ${token}`);
+
+      const requestOptions = {
+        method: "GET",
+        headers: myHeaders,
+        redirect: "follow",
+      };
+
+      const response = await fetch(
+        "https://coinsite.pythonanywhere.com/quesion/",
+        requestOptions
+      );
+      const data = await response.json();
+      console.log("APIdan kelgan data:", data);
+
+      // FILTER qilish: Faqat shu testga tegishli savollar
+      const filteredQuestions = data.filter(
+        (question) => String(question.test) === String(taskId)
+      );
+
+      console.log("Filtered questions:", filteredQuestions);
+
+      setQuestions(filteredQuestions);
+    } catch (error) {
+      console.error("Xatolik:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="teacher-panel">
       <div className="tabs">
@@ -209,16 +258,54 @@ const TeacherCreateTest = () => {
       </div>
 
       {activeTab === "tasks" && (
-        <div className="task-list">
+        <div className="task-section">
           {tasks.length === 0 ? (
             <p>Topshiriqlar mavjud emas</p>
           ) : (
-            tasks.map((task, i) => (
-              <div className="task-card" key={i}>
-                <h2>{task.title}</h2>
-                <p>{task.description}</p>
+            <div className="task-list">
+              {tasks.map((task, i) => {
+                console.log("task:", task); // HAR BIR TASKNI KO'RAMIZ
+
+                return (
+                  <div className="task-card" key={i}>
+                    <h2>{task.title}</h2>
+                    <p>{task.description}</p>
+                    <button
+                      className="view-test-btn"
+                      onClick={() => handleViewTest(task?.id)}
+                    >
+                      Testni ko‘rish
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
+          {/* Test savollar qismi */}
+          {modalOpen && (
+            <div className="modal-overlay">
+              <div className="modal">
+                <button
+                  className="close-btn"
+                  onClick={() => setIsModalOpen(false)}
+                >
+                  X
+                </button>
+                <h3>Test savollari:</h3>
+                {loading ? (
+                  <p>Yuklanmoqda...</p>
+                ) : questions.length > 0 ? (
+                  <ul>
+                    {questions.map((q, idx) => (
+                      <li key={idx}>{q.text}</li> // to'g'rilangan
+                    ))}
+                  </ul>
+                ) : (
+                  <p>Savollar topilmadi</p>
+                )}
               </div>
-            ))
+            </div>
           )}
         </div>
       )}
