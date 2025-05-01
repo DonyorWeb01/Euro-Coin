@@ -97,7 +97,8 @@ const Profile = () => {
   const birthDate = role === "student" ? user.birth_date : user.birthday;
 
   return (
-    <div className="profile-page">
+    <div className="profil1">
+      <div className="profile-page">
       <h1 className="page-title"><FaUser /> Mening Profilim</h1>
 
       <div className="profile-card">
@@ -160,6 +161,7 @@ const Profile = () => {
           </div>
         </div>
       )}
+    </div>
     </div>
   );
 };

@@ -12,8 +12,11 @@ const TeacherHome = () => {
   const [coinAmount, setCoinAmount] = useState("");
   const [description, setDescription] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
+  const [reason, setReason] = useState("");
 
   const token = localStorage.getItem("token");
+  localStorage.setItem("teacher_id", teacher?.id)
+  
 
   useEffect(() => {
     const fetchTeacherData = async () => {
@@ -69,16 +72,37 @@ const TeacherHome = () => {
     setFilteredStudents(filtered);
   };
 
+  const handleReasonSelect = (selectedReason) => {
+    setReason(selectedReason);
+    setCoinAmount("");
+  };
+
+  const handleCoinAmountChange = (e) => {
+    setCoinAmount(e.target.value);
+  };
+
   const handleSendCoin = async (e) => {
     e.preventDefault();
 
-    if (!teacher?.id || !selectedStudent || !coinAmount || !description) {
+    if (!teacher?.id || !selectedStudent || !coinAmount || !description || !reason) {
       alert("Barcha maydonlarni to‘ldiring!");
       return;
     }
 
+    const amount = parseInt(coinAmount);
+
+    if (reason === "davomat" && amount !== 10) {
+      alert("Davomat uchun faqat 10 coin kiritilishi kerak!");
+      return;
+    }
+
+    if (reason === "dars" && (amount < 20 || amount > 30)) {
+      alert("Dars uchun coin 20 va 30 orasida bo‘lishi kerak!");
+      return;
+    }
+
     const requestBody = {
-      amount: parseInt(coinAmount),
+      amount,
       description,
       point_type: "mentor",
       student: parseInt(selectedStudent),
@@ -104,6 +128,7 @@ const TeacherHome = () => {
       setCoinAmount("");
       setDescription("");
       setSelectedStudent("");
+      setReason("");
       setTimeout(() => setSuccessMsg(""), 3000);
     } catch (error) {
       console.error("Coin yuborishda xatolik:", error);
@@ -158,16 +183,32 @@ const TeacherHome = () => {
             </select>
           )}
 
-          <input
-            type="number"
-            placeholder="Coin miqdori"
-            value={coinAmount}
-            onChange={(e) => setCoinAmount(e.target.value)}
+          <select
+            value={reason}
+            onChange={(e) => handleReasonSelect(e.target.value)}
             required
-          />
+          >
+            <option value="">Sababni tanlang</option>
+            <option value="davomat">Davomat uchun</option>
+            <option value="dars">Dars uchun</option>
+          </select>
+
+          {reason && (
+            <input
+              type="number"
+              placeholder={
+                reason === "davomat"
+                  ? "Faqat 10 coin kiriting"
+                  : "20 va 30 oralig‘ida coin kiriting"
+              }
+              value={coinAmount}
+              onChange={handleCoinAmountChange}
+              required
+            />
+          )}
 
           <textarea
-            placeholder="Sabab (masalan: yaxshi qatnashgani uchun)"
+            placeholder="Sababni yozing (masalan: yaxshi qatnashgani uchun)"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             rows={3}

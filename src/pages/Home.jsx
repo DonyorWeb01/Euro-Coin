@@ -8,13 +8,16 @@ const Home = () => {
   const [rewards, setRewards] = useState([]);
   const token = localStorage.getItem("token");
 
+  
+  // console.log(userData?.id);
+  
+  localStorage.setItem("student_id", userData?.id)
+
   const scrollRef = useRef(null);
 
   useEffect(() => {
     const myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${token}`);
-
-    // Fetch user data
     const requestOptions = {
       method: "GET",
       headers: myHeaders,
@@ -48,7 +51,6 @@ const Home = () => {
   }, [token]);
 
   const isLoading = !userData || !rewardsLoaded;
-
   return (
     <div className="page-home">
       {isLoading ? (

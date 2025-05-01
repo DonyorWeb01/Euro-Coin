@@ -3,8 +3,9 @@ import "./Tasks.scss";
 
 const Tasks = () => {
   const [tests, setTests] = useState({});
-  const [selectedQuestions, setSelectedQuestions] = useState([]);
+  const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState([]);
+  const [selectedQuestions, setSelectedQuestions] = useState([]);
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [showModal, setShowModal] = useState(false);
   const [showResultModal, setShowResultModal] = useState(false);
@@ -15,17 +16,23 @@ const Tasks = () => {
   const [activeTestId, setActiveTestId] = useState(null);
   const [showStartConfirm, setShowStartConfirm] = useState(false);
   const [selectedTestId, setSelectedTestId] = useState(null);
+  const [completedTests, setCompletedTests] = useState([]); // ✅ Yangi: Ishlangan testlar uchun
 
   const token = localStorage.getItem("token");
+  const studentId = localStorage.getItem("student_id");
 
   useEffect(() => {
     const myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${token}`);
 
-    fetch("https://coinsite.pythonanywhere.com/student/test/", {
+    const requestOptions = {
       method: "GET",
       headers: myHeaders,
-    })
+      redirect: "follow",
+    };
+
+    // Testni olish
+    fetch("https://coinsite.pythonanywhere.com/test/", requestOptions)
       .then((response) => response.json())
       .then((data) => {
         const testObj = {};
@@ -34,9 +41,40 @@ const Tasks = () => {
         });
         setTests(testObj);
       })
-      .catch((error) => console.error("Error fetching tests:", error));
-  }, [token]);
+      .catch((error) => console.log("Testlarni yuklashda xatolik:", error));
 
+    // Savollarni olish
+    fetch("https://coinsite.pythonanywhere.com/quesion/", requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        setQuestions(data);
+      })
+      .catch((error) => console.log("Savollarni yuklashda xatolik:", error));
+
+    // Javoblarni olish
+    fetch("https://coinsite.pythonanywhere.com/answer/", requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        setAnswers(data);
+      })
+      .catch((error) => console.log("Variantlarni yuklashda xatolik:", error));
+
+    // ✅ Yangi: Ishlangan testlarni olish
+    fetch(
+      "https://coinsite.pythonanywhere.com/api/test-submission-log/",
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        const completedIds = data.map((item) => item.test_id);
+        setCompletedTests(completedIds);
+      })
+      .catch((error) =>
+        console.log("Ishlangan testlarni olishda xatolik:", error)
+      );
+  }, []);
+
+  // Test vaqti
   const startCountdown = (minutes) => {
     const totalSeconds = minutes * 60;
     setTimeLeft(totalSeconds);
@@ -59,34 +97,25 @@ const Tasks = () => {
     setShowStartConfirm(true);
   };
 
-  const handleStartTest = (testId) => {
+  const handleStartTest = () => {
     setShowStartConfirm(false);
+    setShowModal(true);
+    setActiveTestId(selectedTestId);
 
-    const myHeaders = new Headers();
-    myHeaders.append("Authorization", `Bearer ${token}`);
+    const selectedTest = tests[selectedTestId];
+    if (selectedTest) {
+      startCountdown(selectedTest.duration_minutes);
+    }
 
-    const fetchQuestions = fetch("https://coinsite.pythonanywhere.com/quesion/", {
-      method: "GET",
-      headers: myHeaders,
-    }).then((res) => res.json());
+    const filteredQuestions = questions.filter(
+      (q) => q.test === selectedTestId
+    );
+    const questionsWithAnswers = filteredQuestions.map((q) => {
+      const relatedAnswers = answers.filter((ans) => ans.question === q.id);
+      return { ...q, answers: relatedAnswers };
+    });
 
-    const fetchAnswers = fetch("https://coinsite.pythonanywhere.com/answer/", {
-      method: "GET",
-      headers: myHeaders,
-    }).then((res) => res.json());
-
-    Promise.all([fetchQuestions, fetchAnswers])
-      .then(([questions, allAnswers]) => {
-        const filteredQuestions = questions.filter(q => q.test === testId);
-        const filteredAnswers = allAnswers.filter(ans => ans.test_id === testId);
-
-        setSelectedQuestions(filteredQuestions);
-        setAnswers(filteredAnswers);
-        setShowModal(true);
-        setActiveTestId(testId);
-        startCountdown(tests[testId].duration_minutes);
-      })
-      .catch((error) => console.error("Ma'lumotlarni olishda xatolik:", error));
+    setSelectedQuestions(questionsWithAnswers);
   };
 
   const handleAnswerSelect = (questionId, answerId) => {
@@ -96,60 +125,207 @@ const Tasks = () => {
     }));
   };
 
+  // To'g'ri javobni olish
+  // const handleSubmit = () => {
+  //   if (timer) clearInterval(timer);
+
+  //   let score = 0;
+  //   selectedQuestions.forEach((q) => {
+  //     const correctAnswer = (q.answers || []).find((ans) => ans.is_correct);
+  //     const selectedAnswerId = selectedAnswers[q.id];
+  //     if (selectedAnswerId && correctAnswer && selectedAnswerId === correctAnswer.id) {
+  //       score += 1;
+  //     }
+  //   });
+
+  //   const resultData = {
+  //     student_name: "Test Student",
+  //     test_title: tests[activeTestId]?.title || "Noma'lum test",
+  //     score: score, // Butun son bo'lsin
+  //     total_questions: selectedQuestions.length, // Butun son bo'lsin
+  //     taken_at: new Date().toISOString(),
+  //   };
+
+  //   // Serverga yuborilayotgan ma'lumotni tekshirib chiqing
+  //   console.log("Yuborilayotgan ma'lumot:", resultData);
+
+  //   // Faqat agar kerakli barcha ma'lumot to'liq bo'lsa yuboramiz
+  //   if (resultData.student_name && resultData.test_title && typeof resultData.score === "number" && typeof resultData.total_questions === "number") {
+  //     submitTestResult(resultData);
+  //   } else {
+  //     console.error("❌ Ma'lumotlar to'liq emas, yuborilmadi:", resultData);
+  //   }
+
+  //   setResultData({
+  //     score,
+  //     total: selectedQuestions.length,
+  //   });
+
+  //   setDetailedResult({
+  //     student_name: resultData.student_name,
+  //     test_title: resultData.test_title,
+  //     score: `${score}/${selectedQuestions.length}`,
+  //     taken_at: resultData.taken_at,
+  //   });
+
+  //   setShowModal(false);
+  //   setShowResultModal(true);
+  // };
+
+  // const handleSubmit = () => {
+  //   if (timer) clearInterval(timer);
+
+  //   let score = 0;
+  //   selectedQuestions.forEach((q) => {
+  //     const correctAnswer = (q.answers || []).find((ans) => ans.is_correct);
+  //     const selectedAnswerId = selectedAnswers[q.id];
+  //     if (selectedAnswerId && correctAnswer && selectedAnswerId === correctAnswer.id) {
+  //       score += 1;
+  //     }
+  //   });
+
+  //   const testObj = tests[activeTestId];
+  //   const resultData = {
+  //     student_id: studentId,                 // bu son bo‘lishi kerak
+  //     test_id: testObj?.id,                 // test ID
+  //     correct_answers: score                // to‘g‘ri javoblar soni
+  //   };
+
+  //   console.log("📤 Yuborilayotgan ma'lumot:", resultData);
+
+  //   if (
+  //     resultData.student_id &&
+  //     resultData.test_id &&
+  //     typeof resultData.correct_answers === "number"
+  //   ) {
+  //     submitTestResult(resultData);
+  //   } else {
+  //     console.error("❌ Ma'lumotlar to‘liq emas yoki noto‘g‘ri:", resultData);
+  //   }
+
+  //   setResultData({
+  //     score,
+  //     total: selectedQuestions.length,
+  //   });
+
+  //   setDetailedResult({
+  //     student_name: "Test Student",
+  //     test_title: testObj?.title || "Noma'lum test",
+  //     score: `${score}/${selectedQuestions.length}`,
+  //     taken_at: new Date().toISOString(),
+  //   });
+
+  //   setShowModal(false);
+  //   setShowResultModal(true);
+  // };
+
   const handleSubmit = () => {
     if (timer) clearInterval(timer);
     setShowModal(false);
 
-    const payload = {
-      test_id: activeTestId,
-      answers: Object.entries(selectedAnswers).map(([questionId, answerId]) => ({
-        question_id: parseInt(questionId),
-        answer_option_id: answerId,
-      })),
-    };
+    let score = 0;
+    selectedQuestions.forEach((q) => {
+      const correctAnswer = (q.answers || []).find((ans) => ans.is_correct);
+      const selectedAnswerId = selectedAnswers[q.id];
 
-    fetch("https://coinsite.pythonanywhere.com/api/tests/submit/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
-      },
-      body: JSON.stringify(payload),
-    })
-      .then(res => res.json())
-      .then(data => {
-        setResultData(data);
-        fetchDetailedResult();
-        setShowResultModal(true);
-      })
-      .catch((error) => console.error("Javoblarni yuborishda xatolik:", error));
+      if (
+        selectedAnswerId &&
+        correctAnswer &&
+        selectedAnswerId === correctAnswer.id
+      ) {
+        score += 1;
+      }
+    });
+
+    // Serverga natijani yuborish
+    submitTestResult(score);
+
+    // Natija ko'rsatish uchun state yangilash
+    setResultData({
+      score,
+      total: selectedQuestions.length,
+    });
+
+    setDetailedResult({
+      student_name: "Test Student",
+      test_title: tests[activeTestId]?.title || "Noma'lum test",
+      score: `${score}/${selectedQuestions.length}`, // Backtick ichiga olish kerak edi!
+      taken_at: new Date().toISOString(),
+    });
+
+    setShowResultModal(true);
   };
 
-  const fetchDetailedResult = () => {
-    fetch("https://coinsite.pythonanywhere.com/student/test/result/get-me/", {
-      method: "GET",
-      headers: {
-        "Authorization": `Bearer ${token}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setDetailedResult(data);
+  // Ishlagan testni apiga yuborish
+  const submitTestResult = (correctAnswersCount) => {
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Authorization", `Bearer ${token}`);
+
+    const body = JSON.stringify({
+      student_id: Number(studentId),
+      test_id: activeTestId,
+      correct_answers: correctAnswersCount,
+    });
+
+    console.log(body);
+
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: body,
+      redirect: "follow",
+    };
+
+    fetch(
+      "https://coinsite.pythonanywhere.com/api/tests/submit/",
+      requestOptions
+    )
+      .then(async (response) => {
+        const contentType = response.headers.get("content-type");
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(`Server xatosi: ${errorText}`);
+        }
+
+        if (contentType && contentType.includes("application/json")) {
+          const result = await response.json();
+          console.log("✅ Natija yuborildi:", result);
+        } else {
+          const text = await response.text();
+          console.log("✅ Javob JSON emas, text:", text);
+        }
       })
-      .catch((err) => console.error("Natija olishda xatolik:", err));
+      .catch((error) => console.error("❌ Xatolik yuborishda:", error));
   };
 
   const formatTime = (seconds) => {
-    const m = String(Math.floor(seconds / 60)).padStart(2, '0');
-    const s = String(seconds % 60).padStart(2, '0');
+    const m = String(Math.floor(seconds / 60)).padStart(2, "0");
+    const s = String(seconds % 60).padStart(2, "0");
     return `${m}:${s}`;
   };
 
+  // Vaqtni olish
   useEffect(() => {
     return () => {
       if (timer) clearInterval(timer);
     };
   }, [timer]);
+
+  // ishlagan testga natija chiqarish
+  const handleViewResult = (testId) => {
+    const test = tests[testId];
+    setDetailedResult({
+      student_name: "Test Student",
+      test_title: test?.title,
+      score: completedTests.includes(testId)
+        ? "✅ Ishlangan"
+        : "Testni yakunlamagan", // O'zgartirish kiritildi
+      taken_at: new Date().toISOString(),
+    });
+    setShowResultModal(true);
+  };
 
   return (
     <div className="task-page">
@@ -162,9 +338,21 @@ const Tasks = () => {
             </div>
             <p className="desc">{test.description}</p>
             <p className="duration">⏳ {test.duration_minutes} daqiqa</p>
-            <button className="btn" onClick={() => handleStartClick(Number(id))}>
-              Boshlash
-            </button>
+            {completedTests.includes(Number(id)) ? (
+              <button
+                className="btn view-result-btn"
+                onClick={() => handleViewResult(Number(id))}
+              >
+                Natijani ko'rish
+              </button>
+            ) : (
+              <button
+                className="btn"
+                onClick={() => handleStartClick(Number(id))}
+              >
+                Boshlash
+              </button>
+            )}
           </div>
         ))}
       </div>
@@ -173,12 +361,18 @@ const Tasks = () => {
         <div className="modal-overlay1">
           <div className="modal-content1">
             <h2>⚠️ Diqqat!</h2>
-            <p>Ushbu testni faqat bir marta ishlash imkoniyatingiz bor. Boshlashga ishonchingiz komilmi?</p>
+            <p>
+              Ushbu testni faqat bir marta ishlash imkoniyatingiz bor.
+              Boshlashga ishonchingiz komilmi?
+            </p>
             <div className="btns1" style={{ marginTop: "1rem" }}>
-              <button className="btn submit-btn" onClick={() => handleStartTest(selectedTestId)}>
+              <button className="btn submit-btn" onClick={handleStartTest}>
                 Ha, boshlayman
               </button>
-              <button className="btn close-btn" onClick={() => setShowStartConfirm(false)}>
+              <button
+                className="btn close-btn"
+                onClick={() => setShowStartConfirm(false)}
+              >
                 Bekor qilish
               </button>
             </div>
@@ -186,72 +380,80 @@ const Tasks = () => {
         </div>
       )}
 
-{showModal && (
-  <div className="modal-overlay">
-    <div className="modal-content">
-      <h2>🧠 Test Savollari</h2>
-      <p>⏳ Qolgan vaqt: <strong>{formatTime(timeLeft)}</strong></p>
-      <div className="questions-list">
-  <ul>
-    {selectedQuestions.map((q) => (
-      <li key={q.id}>
-        <p>{q.text}</p>
-        <ul>
-          {answers
-            .filter((ans) => ans.question === q.id)
-            .map((ans) => (
-              <li key={ans.id}>
-                <label onClick={() => handleAnswerSelect(q.id, ans.id)}>
-                  <input
-                    type="radio"
-                    name={`question-${q.id}`}
-                    checked={selectedAnswers[q.id] === ans.id}
-                    readOnly
-                  />
-                  {ans.label}. {ans.text}
-                </label>
-              </li>
-            ))}
-        </ul>
-      </li>
-    ))}
-  </ul>
-</div>
+      {showModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h2>🧠 Test Savollari</h2>
+            <p>
+              ⏳ Qolgan vaqt: <strong>{formatTime(timeLeft)}</strong>
+            </p>
+            <div className="questions-list">
+              <ul>
+                {selectedQuestions.map((q) => (
+                  <li key={q.id}>
+                    <p>{q.text}</p>
+                    <ul>
+                      {(q.answers || []).map((ans) => (
+                        <li key={ans.id}>
+                          <label
+                            onClick={() => handleAnswerSelect(q.id, ans.id)}
+                          >
+                            <input
+                              type="radio"
+                              name={`question-${q.id}`}
+                              checked={selectedAnswers[q.id] === ans.id}
+                              readOnly
+                            />
+                            {ans.label}. {ans.text}
+                          </label>
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
+            <div className="modal-buttons">
+              <button className="btn submit-btn" onClick={handleSubmit}>
+                ✅ Yuborish
+              </button>
+              <button
+                className="btn close-btn"
+                onClick={() => {
+                  setShowModal(false);
+                  if (timer) clearInterval(timer);
+                }}
+              >
+                ❌ Yopish
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
-      <div className="modal-buttons">
-        <button className="btn submit-btn" onClick={handleSubmit}>
-          ✅ Yuborish
-        </button>
-        <button
-          className="btn close-btn"
-          onClick={() => {
-            setShowModal(false);
-            if (timer) clearInterval(timer);
-          }}
-        >
-          ❌ Yopish
-        </button>
-      </div>
-    </div>
-  </div>
-)}
-
-
-      {showResultModal && resultData && (
+      {showResultModal && detailedResult && (
         <div className="modal-overlay">
           <div className="modal-content">
             <h2>✅ Natijangiz</h2>
-            {detailedResult && (
-              <>
-                <hr />
-                <p><strong>Ismingiz:</strong> {detailedResult.student_name}</p>
-                <p><strong>Test nomi:</strong> {detailedResult.test_title}</p>
-                <p><strong>Ball:</strong> {detailedResult.score}</p>
-                <p><strong>Vaqt:</strong> {new Date(detailedResult.taken_at).toLocaleString()}</p>
-              </>
-            )}
-            <button className="btn close-btn" onClick={() => setShowResultModal(false)}>
+            <hr />
+            <p>
+              <strong>Ismingiz:</strong> {detailedResult.student_name}
+            </p>
+            <p>
+              <strong>Test nomi:</strong> {detailedResult.test_title}
+            </p>
+            <p>
+              <strong>Holat:</strong> {detailedResult.score}
+            </p>
+            <p>
+              <strong>Vaqt:</strong>{" "}
+              {new Date(detailedResult.taken_at).toLocaleString()}
+            </p>
+            <button
+              className="btn close-btn"
+              onClick={() => setShowResultModal(false)}
+            >
               Yopish
             </button>
           </div>

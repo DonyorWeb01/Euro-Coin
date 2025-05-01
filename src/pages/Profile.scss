@@ -1,10 +1,10 @@
 .profile-page {
   max-width: 900px;
-  margin: 0 auto;
   padding: 2rem;
   font-family: sans-serif;
   margin-top: 5rem;
   margin-left: 250px;
+  width: 900px;
 
   .page-title {
     margin-bottom: 2rem;
@@ -63,7 +63,8 @@
     .profi-btns {
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
+      width: 100%;
       gap: 1rem;
       margin-top: 1.5rem;
       flex-wrap: wrap; // Kichik ekranlarda buttonlar pastga tushadi
@@ -169,6 +170,13 @@
       }
     }
   }
+}
+
+.profil1{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 // Profile page variant
