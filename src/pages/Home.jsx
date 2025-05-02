@@ -7,12 +7,7 @@ const Home = () => {
   const [rewardsLoaded, setRewardsLoaded] = useState(true);
   const [rewards, setRewards] = useState([]);
   const token = localStorage.getItem("token");
-
   
-  // console.log(userData?.id);
-  
-  localStorage.setItem("student_id", userData?.id)
-
   const scrollRef = useRef(null);
 
   useEffect(() => {
@@ -28,6 +23,8 @@ const Home = () => {
       .then((response) => response.json())
       .then((result) => {
         setUserData(result);
+        localStorage.setItem("student_id", result.id)
+
       })
       .catch((error) => {
         console.error("Xatolik:", error);

@@ -78,108 +78,113 @@
     align-items: center;
     z-index: 1001;
     border-radius: 20px;
-  }
-
-  .modal-content {
-    width: 90%;
-    max-width: 800px;
-    height: 80vh;
-    background: #ffffff;
-    border-radius: 1rem;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-
-    h2 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      color: #333;
-      text-align: center;
-    }
-
-    p {
-      text-align: center;
-      margin-bottom: 1rem;
-      font-size: 1.1rem;
-
-      strong {
-        color: #e63946;
+    .modal-content {
+      position: relative;
+      width: 90%;
+      max-width: 800px;
+      height: 80vh;
+      background: #ffffff;
+      border-radius: 1rem;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+  
+      h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        color: #333;
+        text-align: center;
       }
-    }
-
-    .questions-list {
-      flex: 1;
-      overflow-y: auto;
-      padding-right: 10px;
-
-      ul {
-        list-style: none;
-        padding: 0;
-
-        li {
-          background: #f9f9f9;
-          padding: 1rem;
-          border-radius: 0.8rem;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-          margin-bottom: 1.5rem;
-
-          p {
-            font-weight: bold;
-            margin-bottom: 0.8rem;
-            color: #222;
-          }
-
-          ul {
-            list-style: none;
-            padding: 0;
-
-            li {
-              margin-bottom: 0.5rem;
-
-              label {
-                cursor: pointer;
-                font-size: 1rem;
-                color: #555;
-
-                input[type="radio"] {
-                  margin-right: 8px;
+  
+      p {
+        text-align: center;
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+  
+        strong {
+          color: #e63946;
+        }
+      }
+  
+      .questions-list {
+        flex: 1;
+        overflow-y: auto;
+        padding-right: 10px;
+  
+        ul {
+          list-style: none;
+          padding: 0;
+  
+          li {
+            background: #f9f9f9;
+            padding: 1rem;
+            border-radius: 0.8rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+  
+            p {
+              font-weight: bold;
+              margin-bottom: 0.8rem;
+              color: #222;
+            }
+  
+            ul {
+              list-style: none;
+              padding: 0;
+  
+              li {
+                margin-bottom: 0.5rem;
+  
+                label {
+                  cursor: pointer;
+                  font-size: 1rem;
+                  color: #555;
+  
+                  input[type="radio"] {
+                    margin-right: 8px;
+                  }
                 }
               }
             }
           }
         }
       }
-    }
-
-    .modal-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem;
-      margin-top: 1.5rem;
-
-      .btn {
-        padding: 0.8rem 1.5rem;
-        font-size: 1rem;
-        border-radius: 0.6rem;
-        border: none;
-        cursor: pointer;
-        color: #fff;
-        transition: background-color 0.3s ease;
-
-        &.submit-btn {
-          background-color: #38b000;
-
-          &:hover {
-            background-color: #2d8600;
+  
+      .modal-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-top: 1.5rem;
+  
+        .btn {
+          padding: 0.8rem 1.5rem;
+          font-size: 1rem;
+          border-radius: 0.6rem;
+          border: none;
+          cursor: pointer;
+          color: #fff;
+          transition: background-color 0.3s ease;
+  
+          &.submit-btn {
+            background-color: #38b000;
+  
+            &:hover {
+              background-color: #2d8600;
+            }
           }
         }
-
-        &.close-btn {
+        .closeBtn1{
           background-color: #d00000;
-
+          padding: 0.8rem 1.5rem;
+          font-size: 1rem;
+          border-radius: 0.6rem;
+          border: none;
+          cursor: pointer;
+          color: #fff;
+          transition: background-color 0.3s ease;
           &:hover {
             background-color: #a00000;
           }
@@ -187,6 +192,8 @@
       }
     }
   }
+
+ 
 
   .btns1 {
     display: flex;
@@ -223,6 +230,7 @@
   border-radius: 20px;
 
   .modal-content1 {
+    position: relative;
     background-color: #fff;
     padding: 10px;
     border-radius: 20px;
@@ -231,25 +239,71 @@
     max-width: 500px;
     gap: 10px;
     width: 90%;
+    .btns1{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      
+      .submit-btn {
+        background-color: #38b000;
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+        border-radius: 0.6rem;
+        border: none;
+        cursor: pointer;
+        color: #fff;
+        transition: background-color 0.3s ease;
+      
+        &:hover {
+          background-color: #2d8600;
+        }
+      }
+      .closeBtn{
+        background-color: #db3442;
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+        border-radius: 0.6rem;
+        border: none;
+        cursor: pointer;
+        color: #fff;
+        transition: background-color 0.3s ease;
+        &:hover{
+          background-color: #99131e ;
+        }
+      }
+    }
   }
 }
 
-.close-btn {
-  background-color: #d00000;
 
-  &:hover {
-    background-color: #a00000;
+.XBtn{
+  background-color: #99131e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 10px;
+  font-size: 24px;
+
+  &:hover{
+    background-color: #800505;
   }
 }
 
-.submit-btn {
-  background-color: #38b000;
 
-  &:hover {
-    background-color: #2d8600;
-  }
-}
 
+
+// .btn{
+//   position: absolute;
+//   right: 10px;
+//   top: 10px;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   font-size: 24px;
+// }
 /* RESPONSIVE */
 @media (max-width: 992px) {
  

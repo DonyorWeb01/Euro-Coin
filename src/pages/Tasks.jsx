@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Tasks.scss";
+import { IoClose } from "react-icons/io5";
 
 const Tasks = () => {
   const [tests, setTests] = useState({});
@@ -125,99 +126,7 @@ const Tasks = () => {
     }));
   };
 
-  // To'g'ri javobni olish
-  // const handleSubmit = () => {
-  //   if (timer) clearInterval(timer);
 
-  //   let score = 0;
-  //   selectedQuestions.forEach((q) => {
-  //     const correctAnswer = (q.answers || []).find((ans) => ans.is_correct);
-  //     const selectedAnswerId = selectedAnswers[q.id];
-  //     if (selectedAnswerId && correctAnswer && selectedAnswerId === correctAnswer.id) {
-  //       score += 1;
-  //     }
-  //   });
-
-  //   const resultData = {
-  //     student_name: "Test Student",
-  //     test_title: tests[activeTestId]?.title || "Noma'lum test",
-  //     score: score, // Butun son bo'lsin
-  //     total_questions: selectedQuestions.length, // Butun son bo'lsin
-  //     taken_at: new Date().toISOString(),
-  //   };
-
-  //   // Serverga yuborilayotgan ma'lumotni tekshirib chiqing
-  //   console.log("Yuborilayotgan ma'lumot:", resultData);
-
-  //   // Faqat agar kerakli barcha ma'lumot to'liq bo'lsa yuboramiz
-  //   if (resultData.student_name && resultData.test_title && typeof resultData.score === "number" && typeof resultData.total_questions === "number") {
-  //     submitTestResult(resultData);
-  //   } else {
-  //     console.error("❌ Ma'lumotlar to'liq emas, yuborilmadi:", resultData);
-  //   }
-
-  //   setResultData({
-  //     score,
-  //     total: selectedQuestions.length,
-  //   });
-
-  //   setDetailedResult({
-  //     student_name: resultData.student_name,
-  //     test_title: resultData.test_title,
-  //     score: `${score}/${selectedQuestions.length}`,
-  //     taken_at: resultData.taken_at,
-  //   });
-
-  //   setShowModal(false);
-  //   setShowResultModal(true);
-  // };
-
-  // const handleSubmit = () => {
-  //   if (timer) clearInterval(timer);
-
-  //   let score = 0;
-  //   selectedQuestions.forEach((q) => {
-  //     const correctAnswer = (q.answers || []).find((ans) => ans.is_correct);
-  //     const selectedAnswerId = selectedAnswers[q.id];
-  //     if (selectedAnswerId && correctAnswer && selectedAnswerId === correctAnswer.id) {
-  //       score += 1;
-  //     }
-  //   });
-
-  //   const testObj = tests[activeTestId];
-  //   const resultData = {
-  //     student_id: studentId,                 // bu son bo‘lishi kerak
-  //     test_id: testObj?.id,                 // test ID
-  //     correct_answers: score                // to‘g‘ri javoblar soni
-  //   };
-
-  //   console.log("📤 Yuborilayotgan ma'lumot:", resultData);
-
-  //   if (
-  //     resultData.student_id &&
-  //     resultData.test_id &&
-  //     typeof resultData.correct_answers === "number"
-  //   ) {
-  //     submitTestResult(resultData);
-  //   } else {
-  //     console.error("❌ Ma'lumotlar to‘liq emas yoki noto‘g‘ri:", resultData);
-  //   }
-
-  //   setResultData({
-  //     score,
-  //     total: selectedQuestions.length,
-  //   });
-
-  //   setDetailedResult({
-  //     student_name: "Test Student",
-  //     test_title: testObj?.title || "Noma'lum test",
-  //     score: `${score}/${selectedQuestions.length}`,
-  //     taken_at: new Date().toISOString(),
-  //   });
-
-  //   setShowModal(false);
-  //   setShowResultModal(true);
-  // };
 
   const handleSubmit = () => {
     if (timer) clearInterval(timer);
@@ -370,7 +279,7 @@ const Tasks = () => {
                 Ha, boshlayman
               </button>
               <button
-                className="btn close-btn"
+                className="closeBtn"
                 onClick={() => setShowStartConfirm(false)}
               >
                 Bekor qilish
@@ -416,16 +325,16 @@ const Tasks = () => {
 
             <div className="modal-buttons">
               <button className="btn submit-btn" onClick={handleSubmit}>
-                ✅ Yuborish
+                Yuborish
               </button>
               <button
-                className="btn close-btn"
+                className="closeBtn1"
                 onClick={() => {
                   setShowModal(false);
                   if (timer) clearInterval(timer);
                 }}
               >
-                ❌ Yopish
+                Yopish
               </button>
             </div>
           </div>
@@ -451,10 +360,10 @@ const Tasks = () => {
               {new Date(detailedResult.taken_at).toLocaleString()}
             </p>
             <button
-              className="btn close-btn"
+              className="XBtn"
               onClick={() => setShowResultModal(false)}
             >
-              Yopish
+              <IoClose />
             </button>
           </div>
         </div>
