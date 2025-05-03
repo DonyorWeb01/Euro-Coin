@@ -284,25 +284,27 @@ const TeacherCreateTest = () => {
 
           {/* Test savollar qismi */}
           {modalOpen && (
-            <div className="modal-overlay">
-              <div className="modal">
+            <div className="custom-modal-overlay">
+              <div className="custom-modal">
                 <button
-                  className="close-btn"
+                  className="custom-close-btn"
                   onClick={() => setIsModalOpen(false)}
                 >
                   X
                 </button>
-                <h3>Test savollari:</h3>
+                <h3 className="custom-modal-title">Test savollari:</h3>
                 {loading ? (
-                  <p>Yuklanmoqda...</p>
+                  <p className="custom-loading">Yuklanmoqda...</p>
                 ) : questions.length > 0 ? (
-                  <ul>
+                  <ul className="custom-questions-list">
                     {questions.map((q, idx) => (
-                      <li key={idx}>{q.text}</li> // to'g'rilangan
+                      <li key={idx} className="custom-question-item">
+                        {q.text}
+                      </li>
                     ))}
                   </ul>
                 ) : (
-                  <p>Savollar topilmadi</p>
+                  <p className="custom-no-questions">Savollar topilmadi</p>
                 )}
               </div>
             </div>

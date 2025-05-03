@@ -20,8 +20,23 @@
     align-items: start;
     justify-content: center;
     gap: 20px;
-    height: 75vh;
+    height: 70vh;
     overflow-y: scroll;
+
+    
+&::-webkit-scrollbar {
+  height: 12px;
+}
+
+&::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 1rem;
+}
+
+&::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 1rem;
+}
 
     .task-card {
       border: 1px solid #ccc;
@@ -34,7 +49,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      height: 30%;
+      // height: 40%;
 
       .task-header {
         font-weight: bold;
@@ -195,6 +210,123 @@
         }
       }
     }
+    @media (max-width: 1024px) {
+        .modal-content {
+          max-width: 700px;
+          padding: 1.5rem;
+    
+          h2 {
+            font-size: 1.8rem;
+          }
+    
+          p {
+            font-size: 1rem;
+          }
+    
+          .questions-list {
+            ul {
+              li {
+                padding: 0.8rem;
+    
+                ul {
+                  li {
+                    label {
+                      font-size: 0.95rem;
+                    }
+                  }
+                }
+              }
+          }
+        }
+          .modal-buttons {
+            .btn, .closeBtn1 {
+              padding: 0.7rem 1.2rem;
+              font-size: 0.95rem;
+            }
+          }
+        }
+      }
+    
+    @media (max-width: 768px) {
+        .modal-content {
+          max-width: 600px;
+          padding: 1.2rem;
+    
+          h2 {
+            font-size: 1.6rem;
+          }
+    
+          p {
+            font-size: 0.95rem;
+          }
+    
+          .questions-list {
+            ul {
+              li {
+                padding: 0.7rem;
+    
+                ul {
+                  li {
+                    label {
+                      font-size: 0.9rem;
+                    }
+                  }
+                }
+            }
+          }
+        }
+    
+          .modal-buttons {
+            gap: 0.8rem;
+            .btn, .closeBtn1 {
+              padding: 0.6rem 1rem;
+              font-size: 0.9rem;
+            }
+          }
+        }
+      }
+    
+    @media (max-width: 480px) {
+        .modal-content {
+          max-width: 90%;
+          height: 80vh;
+          padding: 1rem;
+    
+          h2 {
+            font-size: 1.4rem;
+          }
+    
+          p {
+            font-size: 0.9rem;
+          }
+    
+          .questions-list {
+            ul {
+              li {
+                padding: 0.6rem;
+    
+                ul {
+                  li {
+                    label {
+                      font-size: 0.85rem;
+                    }
+                  }
+                }
+            }
+          }
+        }
+    
+          .modal-buttons {
+            gap: 0.7rem;
+            .btn, .closeBtn1 {
+              width: 100%;
+              padding: 0.6rem 0.9rem;
+              font-size: 0.85rem;
+            }
+          }
+        }
+      }
+    
   }
 
  
@@ -277,6 +409,46 @@
       }
     }
   }
+  @media (max-width: 768px) {
+      .modal-content1 {
+        padding: 8px;
+        gap: 8px;
+        max-width: 400px;
+  
+        .btns1 {
+          .submit-btn,
+          .closeBtn {
+            padding: 0.6rem 1.2rem;
+            font-size: 0.9rem;
+          }
+        }
+    }
+  }
+  
+  @media (max-width: 480px) {
+      .modal-content1 {
+        padding: 6px;
+        gap: 6px;
+        max-width: 320px;
+  
+        .btns1 {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 100%;
+          // flex-direction: column;
+          gap: 10px;
+  
+          .submit-btn,
+          .closeBtn {
+            width: 100%;
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+          }
+        }
+      }
+  }
+  
 }
 
 

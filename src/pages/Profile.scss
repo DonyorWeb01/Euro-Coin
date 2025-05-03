@@ -2,7 +2,7 @@
   max-width: 900px;
   padding: 2rem;
   font-family: sans-serif;
-  margin-top: 5rem;
+  margin-top: 4rem;
   margin-left: 250px;
   width: 900px;
 
@@ -123,9 +123,12 @@
       background: white;
       padding: 2rem;
       border-radius: 16px;
-      max-width: 400px;
-      width: 90%;
+      // max-width: 400px;
+      width: 100%;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+      margin-top: 7rem;
+      height: 75vh;
+
 
       label {
         width: 100%;
