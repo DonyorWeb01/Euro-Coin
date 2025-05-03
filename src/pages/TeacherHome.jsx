@@ -16,7 +16,69 @@ const TeacherHome = () => {
 
   const token = localStorage.getItem("token");
   localStorage.setItem("teacher_id", teacher?.id)
+  console.log(groups);
+    
   
+
+  // useEffect(() => {
+  //   const fetchTeacherData = async () => {
+  //     try {
+  //       const response = await fetch("https://coinsite.pythonanywhere.com/mentors/get-me/", {
+  //         headers: { Authorization: `Bearer ${token}` },
+  //       });
+
+  //       if (!response.ok) throw new Error("Ma'lumotlarni olishda xatolik");
+
+  //       const data = await response.json();
+  //       setTeacher(data);
+  //     } catch (err) {
+  //       setError(err.message);
+  //     }
+  //   };
+
+  //   const fetchGroups = async () => {
+  //     try {
+  //       const res = await fetch("https://coinsite.pythonanywhere.com/groups/", {
+  //         headers: { Authorization: `Bearer ${token}` },
+  //       });
+    
+  //       const data = await res.json();
+        
+  //       // Teacher ID borligini tekshir
+  //       if (teacher?.id) {
+  //         // Faqat teacher mentor bo'lgan guruhlarni filter qilish
+  //         const filteredGroups = data?.filter(group => group.mentors.includes(teacher?.id));
+  //         setGroups(filteredGroups);
+  //       } else {
+  //         setGroups([]); // Agar teacher yo'q bo'lsa, bo'sh array
+  //       }
+    
+  //     } catch (err) {
+  //       console.error("Guruhlarni olishda xatolik:", err);
+  //     }
+  //   };
+    
+   
+
+
+  //   const fetchAllStudents = async () => {
+  //     try {
+  //       const res = await fetch("https://coinsite.pythonanywhere.com/students/", {
+  //         headers: { Authorization: `Bearer ${token}` },
+  //       });
+
+  //       const data = await res.json();
+  //       setAllStudents(data);
+  //     } catch (err) {
+  //       console.error("O‘quvchilarni olishda xatolik:", err);
+  //     }
+  //   };
+
+  //   fetchTeacherData();
+  //   fetchGroups();
+  //   fetchAllStudents();
+  // }, [token]);
+
 
   useEffect(() => {
     const fetchTeacherData = async () => {
@@ -24,46 +86,56 @@ const TeacherHome = () => {
         const response = await fetch("https://coinsite.pythonanywhere.com/mentors/get-me/", {
           headers: { Authorization: `Bearer ${token}` },
         });
-
         if (!response.ok) throw new Error("Ma'lumotlarni olishda xatolik");
-
         const data = await response.json();
         setTeacher(data);
+        localStorage.setItem("teacher_id", data.id);
       } catch (err) {
         setError(err.message);
       }
     };
-
-    const fetchGroups = async () => {
-      try {
-        const res = await fetch("https://coinsite.pythonanywhere.com/groups/", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-
-        const data = await res.json();
-        setGroups(data);
-      } catch (err) {
-        console.error("Guruhlarni olishda xatolik:", err);
-      }
-    };
-
+  
     const fetchAllStudents = async () => {
       try {
         const res = await fetch("https://coinsite.pythonanywhere.com/students/", {
           headers: { Authorization: `Bearer ${token}` },
         });
-
         const data = await res.json();
         setAllStudents(data);
       } catch (err) {
         console.error("O‘quvchilarni olishda xatolik:", err);
       }
     };
-
+  
     fetchTeacherData();
-    fetchGroups();
     fetchAllStudents();
   }, [token]);
+  
+  useEffect(() => {
+    const fetchGroups = async () => {
+      try {
+        const res = await fetch("https://coinsite.pythonanywhere.com/groups/", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const data = await res.json();
+  
+        if (teacher?.id) {
+          const filteredGroups = data.filter(group => group.mentors.includes(teacher.id));
+          setGroups(filteredGroups);
+        } else {
+          setGroups([]);
+        }
+      } catch (err) {
+        console.error("Guruhlarni olishda xatolik:", err);
+      }
+    };
+  
+    if (teacher) {
+      fetchGroups();
+    }
+  }, [teacher, token]);
+  
+
 
   const handleGroupSelect = (groupId) => {
     setSelectedGroup(groupId);
@@ -142,7 +214,7 @@ const TeacherHome = () => {
 
       <div className="profile-card">
         <img
-          src={teacher?.image || "/default-profile.png"}
+          src={teacher?.image || "/profile.jpg"}
           alt="Profil rasmi"
           className="profile-img"
         />

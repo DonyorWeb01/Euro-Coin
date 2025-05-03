@@ -102,11 +102,11 @@ const Profile = () => {
       <h1 className="page-title"><FaUser /> Mening Profilim</h1>
 
       <div className="profile-card">
-        <img className="avatar" src={user.image || "https://i.pravatar.cc/100"} alt="User Avatar" />
+        <img className="avatar" src={user.image || "/profile.jpg"} alt="User Avatar" />
         <h2 className="name">{user.name}</h2>
 
         <div className="info-box">
-          <p><strong>Rol:</strong> 
+          <p><strong>Toifasi:</strong> 
             {role === "student" && "  Talaba"}
             {role === "teacher" && "  O‘qituvchi"}
             {role === "admin" && "  Admin"}

@@ -59,9 +59,12 @@ const Header1 = ({ userRole }) => {
     setIsInfoOpen(false);
   };
 
+  const [headerOpen, setHeaderOpen] = useState(true)
+
   const handleLogout = () => {
     localStorage.clear();
     window.location.href = "/login";
+    setHeaderOpen(false)
   };
 
   // AGAR URL '/login' bo'lsa headerni ko'rsatmaymiz
@@ -71,6 +74,8 @@ const Header1 = ({ userRole }) => {
 
   return (
     <div>
+         {
+    headerOpen ? ( <div>
       <header
         className={`header ${isProfileOpen || isInfoOpen ? "open-menu" : ""}`}
       >
@@ -245,7 +250,10 @@ const Header1 = ({ userRole }) => {
           isProfileOpen || isInfoOpen ? "open-overlay" : ""
         }`}
       ></div>
+    </div>) : ""
+   }
     </div>
+   
   );
 };
 

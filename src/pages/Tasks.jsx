@@ -240,31 +240,36 @@ const Tasks = () => {
     <div className="task-page">
       <h1 className="page-title">📝 Testlar Ro'yxati</h1>
       <div className="task-list">
-        {Object.entries(tests).map(([id, test]) => (
-          <div className="task-card" key={id}>
-            <div className="task-header">
-              <h3>{test.title}</h3>
-            </div>
-            <p className="desc">{test.description}</p>
-            <p className="duration">⏳ {test.duration_minutes} daqiqa</p>
-            {completedTests.includes(Number(id)) ? (
-              <button
-                className="btn view-result-btn"
-                onClick={() => handleViewResult(Number(id))}
-              >
-                Natijani ko'rish
-              </button>
-            ) : (
-              <button
-                className="btn"
-                onClick={() => handleStartClick(Number(id))}
-              >
-                Boshlash
-              </button>
-            )}
-          </div>
-        ))}
+  {Object.keys(tests).length === 0 ? (
+    <p className="no-tests-message">Sizda hozircha testlar mavjud emas.</p>
+  ) : (
+    Object.entries(tests).map(([id, test]) => (
+      <div className="task-card" key={id}>
+        <div className="task-header">
+          <h3>{test.title}</h3>
+        </div>
+        <p className="desc">{test.description}</p>
+        <p className="duration">⏳ {test.duration_minutes} daqiqa</p>
+        {completedTests.includes(Number(id)) ? (
+          <button
+            className="btn view-result-btn"
+            onClick={() => handleViewResult(Number(id))}
+          >
+            Natijani ko'rish
+          </button>
+        ) : (
+          <button
+            className="btn"
+            onClick={() => handleStartClick(Number(id))}
+          >
+            Boshlash
+          </button>
+        )}
       </div>
+    ))
+  )}
+</div>
+
 
       {showStartConfirm && (
         <div className="modal-overlay1">

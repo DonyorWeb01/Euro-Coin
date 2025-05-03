@@ -60,7 +60,7 @@ const Home = () => {
             <div className="welcome-header">
               <div className="user-image">
                 <img
-                  src={userData?.image || "https://i.pravatar.cc/150?img=3"}
+                  src={userData?.image || "/profile.jpg"}
                   alt="User Avatar"
                 />
               </div>
