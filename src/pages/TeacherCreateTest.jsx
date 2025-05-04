@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./TeacherCreateTest.scss";
 import { BsFillQuestionSquareFill } from "react-icons/bs";
 import { FaQuestion, FaRegEdit } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 const TeacherCreateTest = () => {
   const [activeTab, setActiveTab] = useState("tasks");
@@ -86,7 +87,7 @@ const TeacherCreateTest = () => {
 
   const handleCreateTest = () => {
     if (!selectedGroup || !testTitle || !testDuration) {
-      alert("❗ Iltimos, barcha ma'lumotlarni to'liq to'ldiring.");
+      toast.warning("❗ Iltimos, barcha ma'lumotlarni to'liq to'ldiring.");
       return;
     }
 
@@ -114,13 +115,13 @@ const TeacherCreateTest = () => {
       .then((result) => {
         console.log("✅ Test yaratildi:", result);
         setTestId(result.id);
-        alert(
-          `✅ Test yaratildi (ID: ${result.id}). Endi savol va variantlarni yozing.`
+        toast.success(
+          `✅ Test yaratildi. Endi savol va variantlarni yozing.`
         );
       })
       .catch((error) => {
         console.error("Test yaratishda xatolik:", error);
-        alert("❌ Test yaratishda xatolik yuz berdi.");
+        toast.error("❌ Test yaratishda xatolik yuz berdi.");
       });
   };
 
@@ -130,7 +131,7 @@ const TeacherCreateTest = () => {
       options.some((opt) => opt.trim() === "") ||
       correctAnswerIndex === null
     ) {
-      alert("❗ Iltimos, barcha savol va variantlarni to'liq to'ldiring.");
+      toast.warning("❗ Iltimos, barcha savol va variantlarni to'liq to'ldiring.");
       return;
     }
 
@@ -163,7 +164,7 @@ const TeacherCreateTest = () => {
     )
       .then((response) => {
         if (response.ok) {
-          alert(
+          toast.success(
             "✅ Savol va variantlar saqlandi. Keyingi savolni yozishingiz mumkin."
           );
           setQuestionText("");
@@ -172,20 +173,20 @@ const TeacherCreateTest = () => {
         } else {
           return response.json().then((data) => {
             console.error("❌ Saqlashda xatolik:", data);
-            alert("❌ Savol saqlashda xatolik yuz berdi.");
+            toast.error("❌ Savol saqlashda xatolik yuz berdi.");
           });
         }
       })
       .catch((error) => {
         console.error("❌ So'rovda xatolik:", error);
-        alert("❌ Server bilan aloqa xatosi.");
+        toast.error("❌ Server bilan aloqa xatosi.");
       });
   };
 
   const handleFinishTest = () => {
     resetAllStates();
     setActiveTab("tasks");
-    alert("✅ Test va savollar yaratildi. Mavjud testlarga qaytdingiz.");
+    toast.success("✅ Test va savollar yaratildi. Mavjud testlarga qaytdingiz.");
   };
 
   // Mavjud testlarni ko'rish!

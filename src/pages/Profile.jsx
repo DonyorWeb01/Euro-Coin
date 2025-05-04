@@ -3,6 +3,7 @@ import "./Profile.scss";
 import { FaEdit, FaUser } from "react-icons/fa";
 import Loader from "../components/Loader"; // Loader komponentasini import qilamiz
 import { TbLogout2 } from "react-icons/tb";
+import { toast } from "react-toastify";
 
 const Profile = () => {
   const role = localStorage.getItem("role"); // LocalStorage dan role ni olamiz
@@ -16,6 +17,7 @@ const Profile = () => {
   const handleLogout = () => {
     localStorage.clear(); // Barcha localStorage ma'lumotlarini o'chirib tashlaymiz
     window.location.href = "/login"; // Login sahifasiga yuboramiz
+    toast.success("Hisobingizdan muvaffaqiyatli chiqdingiz!")
   };
 
   // Profil ma'lumotlarini olish uchun API chaqiruv
@@ -83,7 +85,7 @@ const Profile = () => {
     fetch(url, requestOptions)
       .then((res) => res.text())
       .then(() => {
-        alert("✅ Profil yangilandi!");
+        toast.success("✅ Profil yangilandi!");
         setShowModal(false);
         setRefresh(!refresh); // Ma'lumotni qayta yuklash
       })

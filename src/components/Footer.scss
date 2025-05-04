@@ -4,6 +4,7 @@
   left: 50%; /* Markazdan */
   transform: translateX(-50%); /* To'g'ri o'rtaga olish */
   margin-top: auto;
+  // margin-left: 12.5%;
   color: #fff;
   text-align: center;
   padding: 1rem;
@@ -11,7 +12,13 @@
   z-index: 100; /* Footer boshqa elementlar ustida chiqsin */
   width: 100%; /* Katta ekranlar uchun */
   max-width: 100%; /* Max widthni oshirib yubormaslik uchun */
-
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); // Safari uchun
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to right, transparent 239px, rgba(255, 255, 255, 0.3) 30px);
+  
   p {
     margin: 0; /* Text atrofida unnecessary margin bo'lmasin */
   }
@@ -33,7 +40,7 @@
 @media (max-width: 768px) {
   .footer {
     font-size: 0.75rem;
-  }
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.3) 30px);  }
 }
 
 @media (max-width: 576px) {

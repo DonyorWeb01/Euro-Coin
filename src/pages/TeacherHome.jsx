@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./TeacherHome.scss";
+import { toast } from "react-toastify";
 
 const TeacherHome = () => {
   const [teacher, setTeacher] = useState(null);
@@ -196,7 +197,7 @@ const TeacherHome = () => {
         throw new Error(errorData.detail || "Xatolik yuz berdi!");
       }
 
-      setSuccessMsg("Coin muvaffaqiyatli yuborildi!");
+      toast.success("Coin muvaffaqiyatli yuborildi!")
       setCoinAmount("");
       setDescription("");
       setSelectedStudent("");
@@ -205,6 +206,7 @@ const TeacherHome = () => {
     } catch (error) {
       console.error("Coin yuborishda xatolik:", error);
       setError("Coin yuborilmadi. Xatolik yuz berdi.");
+      toast.error("Coin berishda xatolik. Qayta urining!")
     }
   };
 

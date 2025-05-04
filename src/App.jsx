@@ -6,6 +6,9 @@ import Home from "./pages/Home";
 import Tasks from "./pages/Tasks";
 import Profile from "./pages/Profile";
 import LoginModal from "./components/LoginModal";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
+
 
 // 🔹 O‘qituvchi sahifalari
 import TeacherHome from "./pages/TeacherHome";
@@ -75,6 +78,7 @@ const App = () => {
           </Routes>
         </main>
         <Footer />
+        <ToastContainer />
       </div>
     </>
   );

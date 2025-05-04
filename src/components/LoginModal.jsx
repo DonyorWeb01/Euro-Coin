@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // 🛑 useNavigate import
 import "./LoginModal.scss";
+import { toast } from "react-toastify";
 
 const LoginModal = ({ onLogin }) => {
   const [email, setEmail] = useState("");
@@ -45,6 +46,7 @@ const LoginModal = ({ onLogin }) => {
 
       // 🛑 Agar login muvaffaqiyatli bo'lsa, Home sahifasiga yo‘naltirish
       navigate("/"); // Home sahifasiga yo‘naltirish
+      toast.success("Tizimga muvaffaqiyatli kirdingiz!")
 
     } catch (err) {
       setError(err.message);

@@ -7,6 +7,7 @@ import {
   IoMdInformationCircleOutline,
 } from "react-icons/io";
 import { RiLogoutBoxLine } from "react-icons/ri";
+import { toast } from "react-toastify";
 
 const Header1 = ({ userRole }) => {
   const location = useLocation(); // current URL uchun
@@ -65,6 +66,7 @@ const Header1 = ({ userRole }) => {
     localStorage.clear();
     window.location.href = "/login";
     setHeaderOpen(false)
+    toast.success("Hisobingizdan muvaffaqiyatli chiqdingiz!")
   };
 
   // AGAR URL '/login' bo'lsa headerni ko'rsatmaymiz
