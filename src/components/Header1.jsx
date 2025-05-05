@@ -103,7 +103,7 @@ const Header1 = ({ userRole }) => {
           <div className="modalMenu">
             <div className="userInfo">
               <img src="/icon.png" alt="" className="profilImg" />
-              <h2>Donyorbek</h2>
+              <h2>{userData?.name}</h2>
             </div>
             <hr />
             <Link onClick={closeAllMenus} to="/profile">

@@ -17,7 +17,7 @@ const Profile = () => {
   const handleLogout = () => {
     localStorage.clear(); // Barcha localStorage ma'lumotlarini o'chirib tashlaymiz
     window.location.href = "/login"; // Login sahifasiga yuboramiz
-    toast.success("Hisobingizdan muvaffaqiyatli chiqdingiz!")
+    toast.success("Hisobingizdan muvaffaqiyatli chiqdingiz!");
   };
 
   // Profil ma'lumotlarini olish uchun API chaqiruv
@@ -32,8 +32,10 @@ const Profile = () => {
     };
 
     let url = "";
-    if (role === "student") url = "https://coinsite.pythonanywhere.com/students/get-me/";
-    else if (role === "teacher") url = "https://coinsite.pythonanywhere.com/mentors/get-me/";
+    if (role === "student")
+      url = "https://coinsite.pythonanywhere.com/students/get-me/";
+    else if (role === "teacher")
+      url = "https://coinsite.pythonanywhere.com/mentors/get-me/";
 
     if (url) {
       fetch(url, requestOptions)
@@ -72,8 +74,10 @@ const Profile = () => {
     formData.append("id", user.id);
 
     let url = "";
-    if (role === "student") url = `https://coinsite.pythonanywhere.com/students/${user.id}/`;
-    else if (role === "teacher") url = `https://coinsite.pythonanywhere.com/mentors/${user.id}/`;
+    if (role === "student")
+      url = `https://coinsite.pythonanywhere.com/students/${user.id}/`;
+    else if (role === "teacher")
+      url = `https://coinsite.pythonanywhere.com/mentors/${user.id}/`;
 
     const requestOptions = {
       method: "PUT",
@@ -93,7 +97,12 @@ const Profile = () => {
   };
 
   // User yuklanmagan bo'lsa Loader ko'rsatamiz
-  if (!user) return <div className="profile-page1"><Loader /></div>;
+  if (!user)
+    return (
+      <div className="profile-page1">
+        <Loader />
+      </div>
+    );
 
   // Tug‘ilgan sanani role ga qarab aniqlaymiz
   const birthDate = role === "student" ? user.birth_date : user.birthday;
@@ -101,69 +110,151 @@ const Profile = () => {
   return (
     <div className="profil1">
       <div className="profile-page">
-      <h1 className="page-title"><FaUser /> Mening Profilim</h1>
+        <h1 className="page-title">
+          <FaUser /> Mening Profilim
+        </h1>
 
-      <div className="profile-card">
-        <img className="avatar" src={user.image || "/profile.jpg"} alt="User Avatar" />
-        <h2 className="name">{user.name}</h2>
+        <div className="profile-card">
+          <img
+            className="avatar"
+            src={user.image || "/profile.jpg"}
+            alt="User Avatar"
+          />
+          <h2 className="name">{user.name}</h2>
 
-        <div className="info-box">
-          <p><strong>Toifasi:</strong> 
-            {role === "student" && "  Talaba"}
-            {role === "teacher" && "  O‘qituvchi"}
-            {role === "admin" && "  Admin"}
-          </p>
-          <div className="highlight-box">
-            <p><strong>Tug‘ilgan sana:</strong> {birthDate || "Kiritilmagan"}</p>
-            <p><strong>Bio:</strong> {user.bio || "Bio mavjud emas"}</p>
-          </div>
-        </div>
-
-        <div className="profi-btns">
-        <button className="edit-btn" onClick={() => setShowModal(true)}>
-          <FaEdit />  Profilni tahrirlash
-        </button>
-        <button className="logout-btn" onClick={handleLogout}>
-        <TbLogout2 /> Chiqish
-        </button>
-        </div>
-      </div>
-
-      {/* Modal oynasi */}
-      {showModal && (
-        <div className="modal-overlay">
-          <div className="modal">
-            <h2>🛠 Profilni tahrirlash</h2>
-            <label>
-              Ism:
-              <input type="text" name="name" value={user.name} onChange={handleChange} />
-            </label>
-            <label>
-              Tug‘ilgan sana:
-              <input
-                type="date"
-                name={role === "student" ? "birth_date" : "birthday"}
-                value={birthDate || ""}
-                onChange={handleChange}
-              />
-            </label>
-            <label>
-              Rasm yuklash:
-              <input type="file" name="image" onChange={handleFileChange} />
-            </label>
-            <label>
-              Bio:
-              <textarea name="bio" rows="3" value={user.bio || ""} onChange={handleChange} />
-            </label>
-
-            <div className="modal-buttons">
-              <button onClick={handleSave}>💾 Saqlash</button>
-              <button onClick={() => setShowModal(false)}>❌ Bekor qilish</button>
+          <div className="info-box">
+            <p>
+              <strong>Toifasi:</strong>
+              {role === "student" && "  Talaba"}
+              {role === "teacher" && "  O‘qituvchi"}
+              {role === "admin" && "  Admin"}
+            </p>
+            <div className="highlight-box">
+              <p>
+                <strong>Tug‘ilgan sana:</strong> {birthDate || "Kiritilmagan"}
+              </p>
+              <p>
+                <strong>Bio:</strong> {user.bio || "Bio mavjud emas"}
+              </p>
             </div>
           </div>
+
+          <div className="profi-btns">
+            <button className="edit-btn" onClick={() => setShowModal(true)}>
+              <FaEdit /> Profilni tahrirlash
+            </button>
+            <button className="logout-btn" onClick={handleLogout}>
+              <TbLogout2 /> Chiqish
+            </button>
+          </div>
         </div>
-      )}
-    </div>
+
+        {/* Modal oynasi */}
+        {showModal && (
+          // <div className="modal-overlay">
+          //   <div className="modal">
+          //     <h2>🛠 Profilni tahrirlash</h2>
+          //     <label>
+          //       Ism:
+          //       <input type="text" name="name" value={user.name} onChange={handleChange} />
+          //     </label>
+          //     <label>
+          //       Tug‘ilgan sana:
+          //       <input
+          //         type="date"
+          //         name={role === "student" ? "birth_date" : "birthday"}
+          //         value={birthDate || ""}
+          //         onChange={handleChange}
+          //       />
+          //     </label>
+          //     <label>
+          //       Rasm yuklash:
+          //       <input type="file" name="image" onChange={handleFileChange} />
+          //     </label>
+          //     <label>
+          //       Bio:
+          //       <textarea name="bio" rows="3" value={user.bio || ""} onChange={handleChange} />
+          //     </label>
+
+          //     <div className="modal-buttons">
+          //       <button onClick={handleSave}>💾 Saqlash</button>
+          //       <button onClick={() => setShowModal(false)}>❌ Bekor qilish</button>
+          //     </div>
+          //   </div>
+          // </div>
+          <div className="profile-modal-overlay">
+            <div className="profile-modal">
+              <h2 className="profile-modal__title">🛠 Profilni tahrirlash</h2>
+
+              <div className="profile-modal__form-group">
+                <label className="profile-modal__label">
+                  Ism:
+                  <input
+                    type="text"
+                    name="name"
+                    value={user.name}
+                    onChange={handleChange}
+                    className="profile-modal__input"
+                  />
+                </label>
+              </div>
+
+              <div className="profile-modal__form-group">
+                <label className="profile-modal__label">
+                  Tug‘ilgan sana:
+                  <input
+                    type="date"
+                    name={role === "student" ? "birth_date" : "birthday"}
+                    value={birthDate || ""}
+                    onChange={handleChange}
+                    className="profile-modal__input"
+                  />
+                </label>
+              </div>
+
+              <div className="profile-modal__form-group">
+                <label className="profile-modal__label">
+                  Rasm yuklash:
+                  <input
+                    type="file"
+                    name="image"
+                    onChange={handleFileChange}
+                    className="profile-modal__input"
+                  />
+                </label>
+              </div>
+
+              <div className="profile-modal__form-group">
+                <label className="profile-modal__label">
+                  Bio:
+                  <textarea
+                    name="bio"
+                    rows="3"
+                    value={user.bio || ""}
+                    onChange={handleChange}
+                    className="profile-modal__textarea"
+                  />
+                </label>
+              </div>
+
+              <div className="profile-modal__buttons">
+                <button
+                  className="profile-modal__button save"
+                  onClick={handleSave}
+                >
+                  💾 Saqlash
+                </button>
+                <button
+                  className="profile-modal__button cancel"
+                  onClick={() => setShowModal(false)}
+                >
+                  ❌ Bekor qilish
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
