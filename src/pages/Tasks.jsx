@@ -22,6 +22,9 @@ const Tasks = () => {
   const token = localStorage.getItem("token");
   const studentId = localStorage.getItem("student_id");
 
+  console.log(completedTests);
+  
+
   useEffect(() => {
     const myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -67,7 +70,7 @@ const Tasks = () => {
     )
       .then((response) => response.json())
       .then((data) => {
-        const completedIds = data.map((item) => item.test_id);
+        const completedIds = data.map((item) => item.test);
         setCompletedTests(completedIds);
       })
       .catch((error) =>
@@ -126,8 +129,6 @@ const Tasks = () => {
     }));
   };
 
-
-
   const handleSubmit = () => {
     if (timer) clearInterval(timer);
     setShowModal(false);
@@ -172,8 +173,8 @@ const Tasks = () => {
     myHeaders.append("Authorization", `Bearer ${token}`);
 
     const body = JSON.stringify({
-      student_id: Number(studentId),
-      test_id: activeTestId,
+      student: Number(studentId),
+      test: activeTestId,
       correct_answers: correctAnswersCount,
     });
 
@@ -240,36 +241,37 @@ const Tasks = () => {
     <div className="task-page">
       <h1 className="page-title">📝 Testlar Ro'yxati</h1>
       <div className="task-list">
-  {Object.keys(tests).length === 0 ? (
-    <p className="no-tests-message">Sizda hozircha testlar mavjud emas.</p>
-  ) : (
-    Object.entries(tests).map(([id, test]) => (
-      <div className="task-card" key={id}>
-        <div className="task-header">
-          <h3>{test.title}</h3>
-        </div>
-        <p className="desc">{test.description}</p>
-        <p className="duration">⏳ {test.duration_minutes} daqiqa</p>
-        {completedTests.includes(Number(id)) ? (
-          <button
-            className="btn view-result-btn"
-            onClick={() => handleViewResult(Number(id))}
-          >
-            Natijani ko'rish
-          </button>
+        {Object.keys(tests).length === 0 ? (
+          <p className="no-tests-message">
+            Sizda hozircha testlar mavjud emas.
+          </p>
         ) : (
-          <button
-            className="btn"
-            onClick={() => handleStartClick(Number(id))}
-          >
-            Boshlash
-          </button>
+          Object.entries(tests).map(([id, test]) => (
+            <div className="task-card" key={id}>
+              <div className="task-header">
+                <h3>{test.title}</h3>
+              </div>
+              <p className="desc">{test.description}</p>
+              <p className="duration">⏳ {test.duration_minutes} daqiqa</p>
+              {completedTests.includes(Number(id)) ? (
+                <button
+                  className="btn view-result-btn"
+                  onClick={() => handleViewResult(Number(id))}
+                >
+                  Natijani ko'rish
+                </button>
+              ) : (
+                <button
+                  className="btn"
+                  onClick={() => handleStartClick(Number(id))}
+                >
+                  Boshlash
+                </button>
+              )}
+            </div>
+          ))
         )}
       </div>
-    ))
-  )}
-</div>
-
 
       {showStartConfirm && (
         <div className="modal-overlay1">
@@ -294,7 +296,7 @@ const Tasks = () => {
         </div>
       )}
 
-      {showModal && (
+      {/* {showModal && (
         <div className="modal-overlay">
           <div className="modal-content">
             <h2>🧠 Test Savollari</h2>
@@ -344,6 +346,81 @@ const Tasks = () => {
             </div>
           </div>
         </div>
+      )} */}
+      {showModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h2>🧠 Test Savollari</h2>
+            <p>
+              ⏳ Qolgan vaqt: <strong>{formatTime(timeLeft)}</strong>
+            </p>
+            <div className="questions-list">
+              <ul>
+                {selectedQuestions.map((q) => (
+                  <li key={q.id} className="question-item">
+                    {/* Savol matni */}
+                    <p className="question-text">{q.text}</p>
+
+                    {/* Savol rasmi */}
+                    {q.image && (
+                      <div className="question-image">
+                        <img src={q.image} alt="Savol rasmi" />
+                      </div>
+                    )}
+
+                    {/* Variantlar */}
+                    <ul className="answers-list">
+                      {(q.answers || []).map((ans) => (
+                        <li key={ans.id} className="answer-item">
+                          <label
+                            onClick={() => handleAnswerSelect(q.id, ans.id)}
+                            className="answer-label"
+                          >
+                            <input
+                              type="radio"
+                              name={`question-${q.id}`}
+                              checked={selectedAnswers[q.id] === ans.id}
+                              readOnly
+                            />
+
+                            {/* Agar variant matn bo'lsa */}
+                            {ans.text && (
+                              <span className="answer-text">
+                                {ans.label}. {ans.text}
+                              </span>
+                            )}
+
+                            {/* Agar variant rasm bo'lsa */}
+                            {ans.image && (
+                              <div className="answer-image">
+                                <img src={ans.image} alt="Variant rasmi" />
+                              </div>
+                            )}
+                          </label>
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="modal-buttons">
+              <button className="btn submit-btn" onClick={handleSubmit}>
+                Yuborish
+              </button>
+              <button
+                className="closeBtn1"
+                onClick={() => {
+                  setShowModal(false);
+                  if (timer) clearInterval(timer);
+                }}
+              >
+                Yopish
+              </button>
+            </div>
+          </div>
+        </div>
       )}
 
       {showResultModal && detailedResult && (
@@ -364,10 +441,7 @@ const Tasks = () => {
               <strong>Vaqt:</strong>{" "}
               {new Date(detailedResult.taken_at).toLocaleString()}
             </p>
-            <button
-              className="XBtn"
-              onClick={() => setShowResultModal(false)}
-            >
+            <button className="XBtn" onClick={() => setShowResultModal(false)}>
               <IoClose />
             </button>
           </div>

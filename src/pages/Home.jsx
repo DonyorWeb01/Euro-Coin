@@ -81,12 +81,11 @@ const Home = () => {
             <div className="home-section">
               <div className="attendance">
                 <h3>Coinlar statistikasi</h3>
-                {userData?.point_history.length === 0 ? (
+                {userData?.point_history?.length === 0 ? (
                   <p>Hali statistik ma'lumotlar mavjud emas</p>
                 ) : (
                   <ul className="history-list">
-                    {userData?.point_history
-                      .slice()
+                    {userData?.point_history?.slice()
                       .reverse()
                       .map((item, index) => (
                         <li className="history-item" key={index}>
