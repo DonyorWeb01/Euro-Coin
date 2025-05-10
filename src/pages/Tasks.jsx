@@ -21,9 +21,7 @@ const Tasks = () => {
 
   const token = localStorage.getItem("token");
   const studentId = localStorage.getItem("student_id");
-
-  console.log(completedTests);
-  
+  const studentName = localStorage.getItem("student_name");
 
   useEffect(() => {
     const myHeaders = new Headers();
@@ -166,6 +164,12 @@ const Tasks = () => {
     setShowResultModal(true);
   };
 
+  useEffect(() => {
+    if (timer == 0) {
+      handleSubmit(); // ⬅️ Vaqt tugaganda natijani yuborish
+    }
+  }, [timer]);
+
   // Ishlagan testni apiga yuborish
   const submitTestResult = (correctAnswersCount) => {
     const myHeaders = new Headers();
@@ -226,11 +230,12 @@ const Tasks = () => {
   // ishlagan testga natija chiqarish
   const handleViewResult = (testId) => {
     const test = tests[testId];
+
     setDetailedResult({
-      student_name: "Test Student",
+      student_name: studentName,
       test_title: test?.title,
       score: completedTests.includes(testId)
-        ? "✅ Ishlangan"
+        ? `✅ Ishlangan`
         : "Testni yakunlamagan", // O'zgartirish kiritildi
       taken_at: new Date().toISOString(),
     });
@@ -296,57 +301,6 @@ const Tasks = () => {
         </div>
       )}
 
-      {/* {showModal && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <h2>🧠 Test Savollari</h2>
-            <p>
-              ⏳ Qolgan vaqt: <strong>{formatTime(timeLeft)}</strong>
-            </p>
-            <div className="questions-list">
-              <ul>
-                {selectedQuestions.map((q) => (
-                  <li key={q.id}>
-                    <p>{q.text}</p>
-                    <ul>
-                      {(q.answers || []).map((ans) => (
-                        <li key={ans.id}>
-                          <label
-                            onClick={() => handleAnswerSelect(q.id, ans.id)}
-                          >
-                            <input
-                              type="radio"
-                              name={`question-${q.id}`}
-                              checked={selectedAnswers[q.id] === ans.id}
-                              readOnly
-                            />
-                            {ans.label}. {ans.text}
-                          </label>
-                        </li>
-                      ))}
-                    </ul>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="modal-buttons">
-              <button className="btn submit-btn" onClick={handleSubmit}>
-                Yuborish
-              </button>
-              <button
-                className="closeBtn1"
-                onClick={() => {
-                  setShowModal(false);
-                  if (timer) clearInterval(timer);
-                }}
-              >
-                Yopish
-              </button>
-            </div>
-          </div>
-        </div>
-      )} */}
       {showModal && (
         <div className="modal-overlay">
           <div className="modal-content">
@@ -356,10 +310,12 @@ const Tasks = () => {
             </p>
             <div className="questions-list">
               <ul>
-                {selectedQuestions.map((q) => (
+                {selectedQuestions.map((q, index) => (
                   <li key={q.id} className="question-item">
-                    {/* Savol matni */}
-                    <p className="question-text">{q.text}</p>
+                    {/* Savol raqami */}
+                    <p className="question-text">
+                      {index + 1}. {q.text}
+                    </p>
 
                     {/* Savol rasmi */}
                     {q.image && (
@@ -441,7 +397,9 @@ const Tasks = () => {
               <strong>Vaqt:</strong>{" "}
               {new Date(detailedResult.taken_at).toLocaleString()}
             </p>
-            <button className="XBtn" onClick={() => setShowResultModal(false)}>
+            <button className="XBtn" onClick={() => 
+              {setShowResultModal(false); 
+              window.location.reload()}}>
               <IoClose />
             </button>
           </div>

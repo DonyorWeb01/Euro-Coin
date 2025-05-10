@@ -265,7 +265,6 @@ const TeacherCreateTest = () => {
           ) : (
             <div className="task-list">
               {tasks.map((task, i) => {
-                console.log("task:", task); // HAR BIR TASKNI KO'RAMIZ
 
                 return (
                   <div className="task-card" key={i}>

@@ -17,7 +17,6 @@ const TeacherHome = () => {
 
   const token = localStorage.getItem("token");
   localStorage.setItem("teacher_id", teacher?.id)
-  console.log(groups);
     
   
 

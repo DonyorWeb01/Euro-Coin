@@ -330,6 +330,285 @@
   // }
 // 
 
+// .modal-overlay {
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+//   background: rgba(0, 0, 0, 0.6);
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   z-index: 1001;
+//   border-radius: 20px;
+
+//   .modal-content {
+//     position: relative;
+//     width: 90%;
+//     max-width: 800px;
+//     height: 80vh;
+//     background: #ffffff;
+//     border-radius: 1rem;
+//     padding: 2rem;
+//     display: flex;
+//     flex-direction: column;
+//     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+//     overflow: hidden;
+
+//     h2 {
+//       font-size: 2rem;
+//       margin-bottom: 1rem;
+//       color: #333;
+//       text-align: center;
+//     }
+
+//     p {
+//       text-align: center;
+//       margin-bottom: 1rem;
+//       font-size: 1.1rem;
+
+//       strong {
+//         color: #e63946;
+//       }
+//     }
+
+//     .questions-list {
+//       flex: 1;
+//       overflow-y: auto;
+//       padding-right: 10px;
+
+//       ul {
+//         list-style: none;
+//         padding: 0;
+
+//         li {
+//           background: #f9f9f9;
+//           padding: 1rem;
+//           border-radius: 0.8rem;
+//           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+//           margin-bottom: 1.5rem;
+
+//           p {
+//             font-weight: bold;
+//             margin-bottom: 0.8rem;
+//             color: #222;
+//           }
+
+//           /* Savol rasmi */
+//           .question-image {
+//             text-align: center;
+//             margin-bottom: 1rem;
+
+//             img {
+//               max-width: 100%;
+//               max-height: 250px;
+//               object-fit: contain;
+//               border-radius: 0.5rem;
+//               box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+//             }
+//           }
+
+//           ul {
+//             list-style: none;
+//             padding: 0;
+
+//             li {
+//               margin-bottom: 0.8rem;
+
+//               label {
+//                 cursor: pointer;
+//                 font-size: 1rem;
+//                 color: #555;
+//                 display: flex;
+//                 align-items: center;
+//                 gap: 0.8rem;
+
+//                 input[type="radio"] {
+//                   margin-right: 8px;
+//                 }
+
+//                 /* Variant rasmi */
+//                 .answer-image {
+//                   img {
+//                     max-width: 120px;
+//                     max-height: 120px;
+//                     object-fit: contain;
+//                     border-radius: 0.5rem;
+//                     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+//                   }
+//                 }
+//               }
+//             }
+//           }
+//         }
+//       }
+//     }
+
+//     .modal-buttons {
+//       display: flex;
+//       flex-wrap: wrap;
+//       justify-content: space-between;
+//       gap: 1rem;
+//       margin-top: 1.5rem;
+
+//       .btn {
+//         padding: 0.8rem 1.5rem;
+//         font-size: 1rem;
+//         border-radius: 0.6rem;
+//         border: none;
+//         cursor: pointer;
+//         color: #fff;
+//         transition: background-color 0.3s ease;
+
+//         &.submit-btn {
+//           background-color: #38b000;
+
+//           &:hover {
+//             background-color: #2d8600;
+//           }
+//         }
+//       }
+
+//       .closeBtn1 {
+//         background-color: #d00000;
+//         padding: 0.8rem 1.5rem;
+//         font-size: 1rem;
+//         border-radius: 0.6rem;
+//         border: none;
+//         cursor: pointer;
+//         color: #fff;
+//         transition: background-color 0.3s ease;
+
+//         &:hover {
+//           background-color: #a00000;
+//         }
+//       }
+//     }
+//   }
+
+//   /* Responsive */
+//   @media (max-width: 1024px) {
+//     .modal-content {
+//       max-width: 700px;
+//       padding: 1.5rem;
+
+//       h2 {
+//         font-size: 1.8rem;
+//       }
+
+//       p {
+//         font-size: 1rem;
+//       }
+
+//       .questions-list {
+//         ul {
+//           li {
+//             padding: 0.8rem;
+
+//             ul {
+//               li {
+//                 label {
+//                   font-size: 0.95rem;
+//                 }
+//               }
+//             }
+//           }
+//         }
+//       }
+
+//       .modal-buttons {
+//         .btn, .closeBtn1 {
+//           padding: 0.7rem 1.2rem;
+//           font-size: 0.95rem;
+//         }
+//       }
+//     }
+//   }
+
+//   @media (max-width: 768px) {
+//     .modal-content {
+//       max-width: 600px;
+//       padding: 1.2rem;
+
+//       h2 {
+//         font-size: 1.6rem;
+//       }
+
+//       p {
+//         font-size: 0.95rem;
+//       }
+
+//       .questions-list {
+//         ul {
+//           li {
+//             padding: 0.7rem;
+
+//             ul {
+//               li {
+//                 label {
+//                   font-size: 0.9rem;
+//                 }
+//               }
+//             }
+//           }
+//         }
+//       }
+
+//       .modal-buttons {
+//         gap: 0.8rem;
+
+//         .btn, .closeBtn1 {
+//           padding: 0.6rem 1rem;
+//           font-size: 0.9rem;
+//         }
+//       }
+//     }
+//   }
+
+//   @media (max-width: 480px) {
+//     .modal-content {
+//       max-width: 90%;
+//       height: 80vh;
+//       padding: 1rem;
+
+//       h2 {
+//         font-size: 1.4rem;
+//       }
+
+//       p {
+//         font-size: 0.9rem;
+//       }
+
+//       .questions-list {
+//         ul {
+//           li {
+//             padding: 0.6rem;
+
+//             ul {
+//               li {
+//                 label {
+//                   font-size: 0.85rem;
+//                 }
+//               }
+//             }
+//           }
+//         }
+//       }
+
+//       .modal-buttons {
+//         gap: 0.7rem;
+
+//         .btn, .closeBtn1 {
+//           width: 100%;
+//           padding: 0.6rem 0.9rem;
+//           font-size: 0.85rem;
+//         }
+//       }
+//     }
+//   }
+// }
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -388,6 +667,7 @@
           border-radius: 0.8rem;
           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
           margin-bottom: 1.5rem;
+          word-wrap: break-word; /* Uzun matnlar uchun */
 
           p {
             font-weight: bold;
@@ -423,13 +703,21 @@
                 display: flex;
                 align-items: center;
                 gap: 0.8rem;
+                flex-wrap: wrap; /* Variantlarni yangi qatorga o'tkazadi */
 
                 input[type="radio"] {
                   margin-right: 8px;
                 }
 
+                .answer-text{
+                  word-wrap: break-word;
+                  width: 100%;
+                }
+
                 /* Variant rasmi */
                 .answer-image {
+                  display: block; /* Rasmni alohida joylashtiradi */
+                  margin-top: 8px; /* Rasm va text o'rtasidagi bo'shliq */
                   img {
                     max-width: 120px;
                     max-height: 120px;
@@ -608,6 +896,7 @@
     }
   }
 }
+
 
 
   .btns1 {

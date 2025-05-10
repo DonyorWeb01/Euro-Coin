@@ -75,7 +75,7 @@ const LoginModal = ({ onLogin }) => {
             <option value="">Rolni tanlang</option>
             <option value="student">O‘quvchi</option>
             <option value="teacher">O‘qituvchi</option>
-            <option value="admin">Admin</option>
+            {/* <option value="admin">Admin</option> */}
           </select>
 
           {error && <p className="error">{error}</p>}

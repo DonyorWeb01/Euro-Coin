@@ -24,6 +24,7 @@ const Home = () => {
       .then((result) => {
         setUserData(result);
         localStorage.setItem("student_id", result.id)
+        localStorage.setItem("student_name", result.name)
 
       })
       .catch((error) => {
