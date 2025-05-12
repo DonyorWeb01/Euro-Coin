@@ -34,7 +34,7 @@ const Tasks = () => {
     };
 
     // Testni olish
-    fetch("https://coinsite.pythonanywhere.com/test/", requestOptions)
+    fetch("http://apieurocoin.uz/test/", requestOptions)
       .then((response) => response.json())
       .then((data) => {
         const testObj = {};
@@ -46,7 +46,7 @@ const Tasks = () => {
       .catch((error) => console.log("Testlarni yuklashda xatolik:", error));
 
     // Savollarni olish
-    fetch("https://coinsite.pythonanywhere.com/quesion/", requestOptions)
+    fetch("http://apieurocoin.uz/quesion/", requestOptions)
       .then((response) => response.json())
       .then((data) => {
         setQuestions(data);
@@ -54,7 +54,7 @@ const Tasks = () => {
       .catch((error) => console.log("Savollarni yuklashda xatolik:", error));
 
     // Javoblarni olish
-    fetch("https://coinsite.pythonanywhere.com/answer/", requestOptions)
+    fetch("http://apieurocoin.uz/answer/", requestOptions)
       .then((response) => response.json())
       .then((data) => {
         setAnswers(data);
@@ -63,7 +63,7 @@ const Tasks = () => {
 
     // ✅ Yangi: Ishlangan testlarni olish
     fetch(
-      "https://coinsite.pythonanywhere.com/api/test-submission-log/",
+      "http://apieurocoin.uz/api/test-submission-log/",
       requestOptions
     )
       .then((response) => response.json())
@@ -192,7 +192,7 @@ const Tasks = () => {
     };
 
     fetch(
-      "https://coinsite.pythonanywhere.com/api/tests/submit/",
+      "http://apieurocoin.uz/api/tests/submit/",
       requestOptions
     )
       .then(async (response) => {

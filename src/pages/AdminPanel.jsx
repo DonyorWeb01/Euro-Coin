@@ -15,8 +15,7 @@ const AdminPanel = () => {
   const [role, setRole] = useState("student");
   const [successMessage, setSuccessMessage] = useState("");
 
-  const token =
-    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ4MDU5OTgxLCJpYXQiOjE3NDU0Njc5ODEsImp0aSI6IjQ3NGE4ZjUyM2NkZDRkYjc5ZDA3NDRlMzc5OGYzYjM5IiwidXNlcl9pZCI6Nn0.HjbOO_ixcPi88Ti5zy0ow7UPP8C6zSUfxwRbnBzbMSg";
+  const token = localStorage.getItem("token")
 
   const fetchCounts = async () => {
     try {
@@ -24,8 +23,8 @@ const AdminPanel = () => {
       headers.append("Authorization", token);
 
       const [studentsRes, teachersRes] = await Promise.all([
-        fetch("https://coinsite.pythonanywhere.com/students/", { method: "GET", headers }),
-        fetch("https://coinsite.pythonanywhere.com/mentors/", { method: "GET", headers }),
+        fetch("http://apieurocoin.uz/students/", { method: "GET", headers }),
+        fetch("http://apieurocoin.uz/mentors/", { method: "GET", headers }),
       ]);
 
       if (!studentsRes.ok || !teachersRes.ok) {
@@ -63,8 +62,8 @@ const AdminPanel = () => {
 
     const endpoint =
       role === "student"
-        ? "https://coinsite.pythonanywhere.com/students/"
-        : "https://coinsite.pythonanywhere.com/mentors/";
+        ? "http://apieurocoin.uz/students/"
+        : "http://apieurocoin.uz/mentors/";
 
     try {
       const response = await fetch(endpoint, {

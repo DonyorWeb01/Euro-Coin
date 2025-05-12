@@ -16,9 +16,9 @@ const Header = ({ userRole }) => {
       try {
         let url = "";
         if (userRole === "student") {
-          url = "https://coinsite.pythonanywhere.com/students/get-me/";
+          url = "http://apieurocoin.uz/students/get-me/";
         } else if (userRole === "teacher") {
-          url = "https://coinsite.pythonanywhere.com/mentors/get-me/";
+          url = "http://apieurocoin.uz/mentors/get-me/";
         } else {
           return;
         }

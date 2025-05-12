@@ -11,7 +11,7 @@ const RewardsSection = ({ onLoad }) => {
     const myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${token}`);
 
-    fetch("https://coinsite.pythonanywhere.com/achievement/", {
+    fetch("http://apieurocoin.uz/achievement/", {
       method: "GET",
       headers: myHeaders,
       redirect: "follow",

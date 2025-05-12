@@ -27,7 +27,7 @@ const TeacherCreateTest = () => {
         myHeaders.append("Authorization", `Bearer ${token}`);
 
         const groupsResponse = await fetch(
-          "https://coinsite.pythonanywhere.com/groups/",
+          "http://apieurocoin.uz/groups/",
           {
             method: "GET",
             headers: myHeaders,
@@ -48,7 +48,7 @@ const TeacherCreateTest = () => {
         }
 
         const testsResponse = await fetch(
-          "https://coinsite.pythonanywhere.com/test/",
+          "http://apieurocoin.uz/test/",
           {
             method: "GET",
             headers: myHeaders,
@@ -110,7 +110,7 @@ const TeacherCreateTest = () => {
       redirect: "follow",
     };
 
-    fetch("https://coinsite.pythonanywhere.com/test/create/", requestOptions)
+    fetch("http://apieurocoin.uz/test/create/", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         console.log("✅ Test yaratildi:", result);
@@ -159,7 +159,7 @@ const TeacherCreateTest = () => {
     };
 
     fetch(
-      "https://coinsite.pythonanywhere.com/quesion/option/create/",
+      "http://apieurocoin.uz/quesion/option/create/",
       requestOptions
     )
       .then((response) => {
@@ -218,7 +218,7 @@ const TeacherCreateTest = () => {
       };
 
       const response = await fetch(
-        "https://coinsite.pythonanywhere.com/quesion/",
+        "http://apieurocoin.uz/quesion/",
         requestOptions
       );
       const data = await response.json();

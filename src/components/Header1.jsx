@@ -28,7 +28,7 @@ const Header1 = ({ userRole }) => {
 
     if (userRole === "student") {
       fetch(
-        "https://coinsite.pythonanywhere.com/students/get-me/",
+        "http://apieurocoin.uz/students/get-me/",
         requestOptions
       )
         .then((response) => response.json())
@@ -36,7 +36,7 @@ const Header1 = ({ userRole }) => {
         .catch((error) => console.log("Xatolik:", error));
     } else if (userRole === "teacher") {
       fetch(
-        "https://coinsite.pythonanywhere.com/mentors/get-me/",
+        "http://apieurocoin.uz/mentors/get-me/",
         requestOptions
       )
         .then((response) => response.json())

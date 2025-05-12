@@ -18,72 +18,11 @@ const TeacherHome = () => {
   const token = localStorage.getItem("token");
   localStorage.setItem("teacher_id", teacher?.id)
     
-  
-
-  // useEffect(() => {
-  //   const fetchTeacherData = async () => {
-  //     try {
-  //       const response = await fetch("https://coinsite.pythonanywhere.com/mentors/get-me/", {
-  //         headers: { Authorization: `Bearer ${token}` },
-  //       });
-
-  //       if (!response.ok) throw new Error("Ma'lumotlarni olishda xatolik");
-
-  //       const data = await response.json();
-  //       setTeacher(data);
-  //     } catch (err) {
-  //       setError(err.message);
-  //     }
-  //   };
-
-  //   const fetchGroups = async () => {
-  //     try {
-  //       const res = await fetch("https://coinsite.pythonanywhere.com/groups/", {
-  //         headers: { Authorization: `Bearer ${token}` },
-  //       });
-    
-  //       const data = await res.json();
-        
-  //       // Teacher ID borligini tekshir
-  //       if (teacher?.id) {
-  //         // Faqat teacher mentor bo'lgan guruhlarni filter qilish
-  //         const filteredGroups = data?.filter(group => group.mentors.includes(teacher?.id));
-  //         setGroups(filteredGroups);
-  //       } else {
-  //         setGroups([]); // Agar teacher yo'q bo'lsa, bo'sh array
-  //       }
-    
-  //     } catch (err) {
-  //       console.error("Guruhlarni olishda xatolik:", err);
-  //     }
-  //   };
-    
-   
-
-
-  //   const fetchAllStudents = async () => {
-  //     try {
-  //       const res = await fetch("https://coinsite.pythonanywhere.com/students/", {
-  //         headers: { Authorization: `Bearer ${token}` },
-  //       });
-
-  //       const data = await res.json();
-  //       setAllStudents(data);
-  //     } catch (err) {
-  //       console.error("O‘quvchilarni olishda xatolik:", err);
-  //     }
-  //   };
-
-  //   fetchTeacherData();
-  //   fetchGroups();
-  //   fetchAllStudents();
-  // }, [token]);
-
 
   useEffect(() => {
     const fetchTeacherData = async () => {
       try {
-        const response = await fetch("https://coinsite.pythonanywhere.com/mentors/get-me/", {
+        const response = await fetch("http://apieurocoin.uz/mentors/get-me/", {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (!response.ok) throw new Error("Ma'lumotlarni olishda xatolik");
@@ -97,7 +36,7 @@ const TeacherHome = () => {
   
     const fetchAllStudents = async () => {
       try {
-        const res = await fetch("https://coinsite.pythonanywhere.com/students/", {
+        const res = await fetch("http://apieurocoin.uz/students/", {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await res.json();
@@ -114,7 +53,7 @@ const TeacherHome = () => {
   useEffect(() => {
     const fetchGroups = async () => {
       try {
-        const res = await fetch("https://coinsite.pythonanywhere.com/groups/", {
+        const res = await fetch("http://apieurocoin.uz/groups/", {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await res.json();
@@ -182,7 +121,7 @@ const TeacherHome = () => {
     };
 
     try {
-      const response = await fetch("https://coinsite.pythonanywhere.com/give-points/", {
+      const response = await fetch("http://apieurocoin.uz/give-points/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

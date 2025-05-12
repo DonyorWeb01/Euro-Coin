@@ -4,7 +4,7 @@ import "./UsersList.scss";
 const UsersList = () => {
   const [students, setStudents] = useState([]);
   const [teachers, setTeachers] = useState([]);
-  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ4MDU5OTgxLCJpYXQiOjE3NDU0Njc5ODEsImp0aSI6IjQ3NGE4ZjUyM2NkZDRkYjc5ZDA3NDRlMzc5OGYzYjM5IiwidXNlcl9pZCI6Nn0.HjbOO_ixcPi88Ti5zy0ow7UPP8C6zSUfxwRbnBzbMSg"; // Token
+  const token = localStorage.getItem("token")
 
   useEffect(() => {
     const myHeaders = new Headers();
@@ -16,13 +16,13 @@ const UsersList = () => {
     };
 
     // Fetching students
-    fetch("https://coinsite.pythonanywhere.com/students/", requestOptions)
+    fetch("http://apieurocoin.uz/students/", requestOptions)
       .then((response) => response.json())
       .then((result) => setStudents(result))
       .catch((error) => console.error("Error fetching students:", error));
 
     // Fetching teachers
-    fetch("https://coinsite.pythonanywhere.com/mentors/", requestOptions)
+    fetch("http://apieurocoin.uz/mentors/", requestOptions)
       .then((response) => response.json())
       .then((result) => setTeachers(result))
       .catch((error) => console.error("Error fetching teachers:", error));
