@@ -33,9 +33,9 @@ const Profile = () => {
 
     let url = "";
     if (role === "student")
-      url = "http://apieurocoin.uz/students/get-me/";
+      url = "https://apieurocoin.uz/students/get-me/";
     else if (role === "teacher")
-      url = "http://apieurocoin.uz/mentors/get-me/";
+      url = "https://apieurocoin.uz/mentors/get-me/";
 
     if (url) {
       fetch(url, requestOptions)
@@ -75,9 +75,9 @@ const Profile = () => {
 
     let url = "";
     if (role === "student")
-      url = `http://apieurocoin.uz/students/${user.id}/`;
+      url = `https://apieurocoin.uz/students/${user.id}/`;
     else if (role === "teacher")
-      url = `http://apieurocoin.uz/mentors/${user.id}/`;
+      url = `https://apieurocoin.uz/mentors/${user.id}/`;
 
     const requestOptions = {
       method: "PUT",

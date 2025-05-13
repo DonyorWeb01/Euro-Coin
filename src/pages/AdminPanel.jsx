@@ -23,8 +23,8 @@ const AdminPanel = () => {
       headers.append("Authorization", token);
 
       const [studentsRes, teachersRes] = await Promise.all([
-        fetch("http://apieurocoin.uz/students/", { method: "GET", headers }),
-        fetch("http://apieurocoin.uz/mentors/", { method: "GET", headers }),
+        fetch("https://apieurocoin.uz/students/", { method: "GET", headers }),
+        fetch("https://apieurocoin.uz/mentors/", { method: "GET", headers }),
       ]);
 
       if (!studentsRes.ok || !teachersRes.ok) {
@@ -62,8 +62,8 @@ const AdminPanel = () => {
 
     const endpoint =
       role === "student"
-        ? "http://apieurocoin.uz/students/"
-        : "http://apieurocoin.uz/mentors/";
+        ? "https://apieurocoin.uz/students/"
+        : "https://apieurocoin.uz/mentors/";
 
     try {
       const response = await fetch(endpoint, {

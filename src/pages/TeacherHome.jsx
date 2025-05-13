@@ -22,7 +22,7 @@ const TeacherHome = () => {
   useEffect(() => {
     const fetchTeacherData = async () => {
       try {
-        const response = await fetch("http://apieurocoin.uz/mentors/get-me/", {
+        const response = await fetch("https://apieurocoin.uz/mentors/get-me/", {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (!response.ok) throw new Error("Ma'lumotlarni olishda xatolik");
@@ -36,7 +36,7 @@ const TeacherHome = () => {
   
     const fetchAllStudents = async () => {
       try {
-        const res = await fetch("http://apieurocoin.uz/students/", {
+        const res = await fetch("https://apieurocoin.uz/students/", {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await res.json();
@@ -53,7 +53,7 @@ const TeacherHome = () => {
   useEffect(() => {
     const fetchGroups = async () => {
       try {
-        const res = await fetch("http://apieurocoin.uz/groups/", {
+        const res = await fetch("https://apieurocoin.uz/groups/", {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await res.json();
@@ -121,7 +121,7 @@ const TeacherHome = () => {
     };
 
     try {
-      const response = await fetch("http://apieurocoin.uz/give-points/", {
+      const response = await fetch("https://apieurocoin.uz/give-points/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

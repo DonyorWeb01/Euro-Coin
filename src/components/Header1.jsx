@@ -28,7 +28,7 @@ const Header1 = ({ userRole }) => {
 
     if (userRole === "student") {
       fetch(
-        "http://apieurocoin.uz/students/get-me/",
+        "https://apieurocoin.uz/students/get-me/",
         requestOptions
       )
         .then((response) => response.json())
@@ -36,7 +36,7 @@ const Header1 = ({ userRole }) => {
         .catch((error) => console.log("Xatolik:", error));
     } else if (userRole === "teacher") {
       fetch(
-        "http://apieurocoin.uz/mentors/get-me/",
+        "https://apieurocoin.uz/mentors/get-me/",
         requestOptions
       )
         .then((response) => response.json())

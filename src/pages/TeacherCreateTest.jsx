@@ -27,7 +27,7 @@ const TeacherCreateTest = () => {
         myHeaders.append("Authorization", `Bearer ${token}`);
 
         const groupsResponse = await fetch(
-          "http://apieurocoin.uz/groups/",
+          "https://apieurocoin.uz/groups/",
           {
             method: "GET",
             headers: myHeaders,
@@ -48,7 +48,7 @@ const TeacherCreateTest = () => {
         }
 
         const testsResponse = await fetch(
-          "http://apieurocoin.uz/test/",
+          "https://apieurocoin.uz/test/",
           {
             method: "GET",
             headers: myHeaders,
@@ -110,7 +110,7 @@ const TeacherCreateTest = () => {
       redirect: "follow",
     };
 
-    fetch("http://apieurocoin.uz/test/create/", requestOptions)
+    fetch("https://apieurocoin.uz/test/create/", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         console.log("✅ Test yaratildi:", result);
@@ -159,7 +159,7 @@ const TeacherCreateTest = () => {
     };
 
     fetch(
-      "http://apieurocoin.uz/quesion/option/create/",
+      "https://apieurocoin.uz/quesion/option/create/",
       requestOptions
     )
       .then((response) => {
@@ -218,7 +218,7 @@ const TeacherCreateTest = () => {
       };
 
       const response = await fetch(
-        "http://apieurocoin.uz/quesion/",
+        "https://apieurocoin.uz/quesion/",
         requestOptions
       );
       const data = await response.json();

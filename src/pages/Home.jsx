@@ -19,7 +19,7 @@ const Home = () => {
       redirect: "follow",
     };
 
-    fetch("http://apieurocoin.uz/students/get-me/", requestOptions)
+    fetch("https://apieurocoin.uz/students/get-me/", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         setUserData(result);
@@ -32,7 +32,7 @@ const Home = () => {
       });
 
     // Fetch rewards data
-    fetch("http://apieurocoin.uz/achievement/", {
+    fetch("https://apieurocoin.uz/achievement/", {
       method: "GET",
       headers: myHeaders,
       redirect: "follow",

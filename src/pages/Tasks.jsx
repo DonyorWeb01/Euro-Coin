@@ -34,7 +34,7 @@ const Tasks = () => {
     };
 
     // Testni olish
-    fetch("http://apieurocoin.uz/test/", requestOptions)
+    fetch("https://apieurocoin.uz/test/", requestOptions)
       .then((response) => response.json())
       .then((data) => {
         const testObj = {};
@@ -46,7 +46,7 @@ const Tasks = () => {
       .catch((error) => console.log("Testlarni yuklashda xatolik:", error));
 
     // Savollarni olish
-    fetch("http://apieurocoin.uz/quesion/", requestOptions)
+    fetch("https://apieurocoin.uz/quesion/", requestOptions)
       .then((response) => response.json())
       .then((data) => {
         setQuestions(data);
@@ -54,7 +54,7 @@ const Tasks = () => {
       .catch((error) => console.log("Savollarni yuklashda xatolik:", error));
 
     // Javoblarni olish
-    fetch("http://apieurocoin.uz/answer/", requestOptions)
+    fetch("https://apieurocoin.uz/answer/", requestOptions)
       .then((response) => response.json())
       .then((data) => {
         setAnswers(data);
@@ -63,7 +63,7 @@ const Tasks = () => {
 
     // ✅ Yangi: Ishlangan testlarni olish
     fetch(
-      "http://apieurocoin.uz/api/test-submission-log/",
+      "https://apieurocoin.uz/api/test-submission-log/",
       requestOptions
     )
       .then((response) => response.json())
@@ -192,7 +192,7 @@ const Tasks = () => {
     };
 
     fetch(
-      "http://apieurocoin.uz/api/tests/submit/",
+      "https://apieurocoin.uz/api/tests/submit/",
       requestOptions
     )
       .then(async (response) => {

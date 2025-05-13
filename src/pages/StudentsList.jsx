@@ -19,14 +19,14 @@ const StudentsList = () => {
           Authorization: `Bearer ${token}`,
         };
 
-        const mentorRes = await fetch("http://apieurocoin.uz/mentors/get-me/", { headers });
+        const mentorRes = await fetch("https://apieurocoin.uz/mentors/get-me/", { headers });
         const mentorData = await mentorRes.json();
         const groupIds = mentorData.my_group_id?.map((g) => g) || [];
         setMyGroupIds(groupIds);
 
         const [groupsRes, studentsRes] = await Promise.all([
-          fetch("http://apieurocoin.uz/groups/", { headers }),
-          fetch("http://apieurocoin.uz/students/", { headers }),
+          fetch("https://apieurocoin.uz/groups/", { headers }),
+          fetch("https://apieurocoin.uz/students/", { headers }),
         ]);
 
         setGroups(await groupsRes.json());
@@ -49,7 +49,7 @@ const StudentsList = () => {
       const headers = {
         Authorization: `Bearer ${token}`,
       };
-      const res = await fetch("http://apieurocoin.uz/students/test/result/", { headers });
+      const res = await fetch("https://apieurocoin.uz/students/test/result/", { headers });
       const data = await res.json();
       const studentData = data.filter((item) => item.student === studentId);
 

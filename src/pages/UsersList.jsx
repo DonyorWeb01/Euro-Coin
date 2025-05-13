@@ -16,13 +16,13 @@ const UsersList = () => {
     };
 
     // Fetching students
-    fetch("http://apieurocoin.uz/students/", requestOptions)
+    fetch("https://apieurocoin.uz/students/", requestOptions)
       .then((response) => response.json())
       .then((result) => setStudents(result))
       .catch((error) => console.error("Error fetching students:", error));
 
     // Fetching teachers
-    fetch("http://apieurocoin.uz/mentors/", requestOptions)
+    fetch("https://apieurocoin.uz/mentors/", requestOptions)
       .then((response) => response.json())
       .then((result) => setTeachers(result))
       .catch((error) => console.error("Error fetching teachers:", error));

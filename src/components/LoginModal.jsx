@@ -19,7 +19,7 @@ const LoginModal = ({ onLogin }) => {
     }
 
     try {
-      const response = await fetch("http://apieurocoin.uz/token/", {
+      const response = await fetch("https://apieurocoin.uz/token/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
